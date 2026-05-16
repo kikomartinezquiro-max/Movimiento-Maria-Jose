@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Programa Integral de Movimiento · María José Monedero · Kiko Martínez</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;scroll-padding-top:74px}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.75;color:#1a1a2e;margin:0;background:#faf7f2}
+  .wrap{max-width:840px;margin:0 auto;padding:0 20px}
+  h1,h2,h3,h4{font-family:Georgia,'Times New Roman',serif;line-height:1.3}
+  p{margin:0 0 14px}
+  a{color:#c1704a}
+
+  /* MENÚ STICKY */
+  .nav-sticky{position:sticky;top:0;z-index:100;background:#0d1117;border-bottom:1px solid #2c3e50;padding:10px 16px;display:flex;gap:6px;overflow-x:auto;white-space:nowrap;scrollbar-width:thin}
+  .nav-sticky::-webkit-scrollbar{height:4px}
+  .nav-sticky::-webkit-scrollbar-thumb{background:#c9a96e;border-radius:2px}
+  .nav-btn{background:transparent;color:#faf7f2;border:1px solid #2c3e50;padding:7px 14px;border-radius:18px;font-size:0.78rem;cursor:pointer;font-weight:500;font-family:inherit;transition:all .2s;flex-shrink:0}
+  .nav-btn:hover,.nav-btn:focus{background:#c9a96e;color:#0d1117;border-color:#c9a96e;outline:none}
+
+  /* PORTADA */
+  .portada{background:#0d1117;color:#faf7f2;padding:80px 24px 90px;text-align:center;position:relative;overflow:hidden}
+  .portada .small{font-size:0.82rem;letter-spacing:5px;color:#c9a96e;text-transform:uppercase;margin-bottom:18px}
+  .portada h1{font-size:2.6rem;letter-spacing:1px;margin:18px 0 8px;color:#faf7f2;font-weight:400}
+  .portada .subt{font-family:Georgia,serif;font-size:1.2rem;color:#c1704a;letter-spacing:1px;margin-bottom:28px;font-style:italic}
+  .portada .quien{font-family:Georgia,serif;font-size:1.45rem;color:#c9a96e;margin:12px 0}
+  .portada .frase{color:#888899;font-style:italic;font-size:0.98rem;margin-top:34px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7}
+  .ornament{height:1px;background:#c9a96e;width:64px;margin:24px auto}
+
+  /* SECCIONES */
+  section{padding:50px 20px}
+  .sec-light{background:#faf7f2}
+  .sec-warm{background:#f5ede0}
+  .sec-dark{background:#1a1f2e;color:#faf7f2}
+  .sec-night{background:#0d1117;color:#faf7f2}
+  section h2{font-size:1.85rem;color:#2c3e50;margin:0 0 8px}
+  .sec-dark h2, .sec-night h2{color:#c9a96e}
+  .sec-sub{color:#8b7355;font-style:italic;margin-bottom:28px;font-size:0.98rem}
+  .sec-dark .sec-sub, .sec-night .sec-sub{color:#888899}
+
+  /* BLOQUES MAPA */
+  .mapa-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .mapa-card{background:#fff;padding:18px;border-radius:10px;font-size:0.92rem;cursor:pointer;transition:transform .2s, box-shadow .2s;border:0;text-align:left;font-family:inherit;color:inherit;width:100%}
+  .mapa-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.08)}
+  .mapa-card strong{display:block;color:#2c3e50;font-family:Georgia,serif;font-size:1.05rem;margin-bottom:4px}
+  .mapa-card span{color:#8b7355;font-size:0.86rem;line-height:1.5}
+
+  /* AVISO MÉDICO */
+  .aviso{background:#fff8e6;border:2px solid #c1704a;border-radius:14px;padding:22px;display:flex;gap:16px;align-items:flex-start}
+  .aviso .ico{font-size:2.2rem;line-height:1;flex-shrink:0}
+  .aviso h3{margin:0 0 6px;color:#c1704a}
+  .aviso p{margin:0;color:#4a4a6a;font-size:0.95rem;line-height:1.65}
+
+  /* PERFIL */
+  .perfil-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:24px 0}
+  .perfil-chip{background:#fff;border-left:4px solid #c9a96e;padding:14px 16px;border-radius:0 10px 10px 0}
+  .perfil-chip .k{font-size:0.72rem;color:#8b7355;text-transform:uppercase;letter-spacing:1.5px;display:block;margin-bottom:4px}
+  .perfil-chip .v{font-weight:600;color:#2c3e50;font-size:0.97rem}
+
+  /* FICHAS DE EJERCICIO */
+  .ficha{background:#fff;border-radius:14px;padding:22px;margin:20px 0;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+  .ficha.yoga{border-left:5px solid #7a9e7e}
+  .ficha.fuerza{border-left:5px solid #c1704a}
+  .ficha.movilidad{border-left:5px solid #c9a96e}
+  .ficha.calistenia{border-left:5px solid #2c3e50}
+  .ficha-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .badge-pilar{padding:3px 11px;border-radius:18px;font-size:0.66rem;text-transform:uppercase;letter-spacing:1.3px;color:#fff;font-weight:600;display:inline-block}
+  .badge-pilar.yoga{background:#7a9e7e}
+  .badge-pilar.fuerza{background:#c1704a}
+  .badge-pilar.movilidad{background:#c9a96e}
+  .badge-pilar.calistenia{background:#2c3e50}
+  .ficha h3{margin:8px 0 2px;color:#2c3e50;font-size:1.2rem}
+  .ficha .sub{color:#888899;font-style:italic;font-size:0.88rem;margin-bottom:0}
+  .badges-row{display:flex;flex-wrap:wrap;gap:6px}
+  .badge-sem{padding:3px 10px;border-radius:18px;font-size:0.7rem;color:#fff;font-weight:600}
+  .badge-sem.v{background:#4caf50}
+  .badge-sem.a{background:#ff9800}
+  .badge-sem.r{background:#f44336}
+  .badge-sem.b{background:#5a7da3}
+  .bloque{background:#faf7f2;padding:14px 16px;border-radius:9px;margin-bottom:10px;font-size:0.93rem;line-height:1.65}
+  .bloque strong{color:#c1704a;display:block;margin-bottom:4px;font-size:0.86rem;letter-spacing:0.3px}
+  .yoga .bloque strong{color:#5a7d5e}
+  .fuerza .bloque strong{color:#a35a3a}
+  .movilidad .bloque strong{color:#a8893f}
+  .calistenia .bloque strong{color:#2c3e50}
+  .ficha .vid-link{display:inline-block;background:#2c3e50;color:#fff;text-decoration:none;padding:9px 16px;border-radius:8px;font-size:0.82rem;margin-top:6px;font-weight:500}
+  .yoga .vid-link{background:#7a9e7e}
+  .fuerza .vid-link{background:#c1704a}
+  .movilidad .vid-link{background:#c9a96e;color:#0d1117}
+  .ficha ol, .ficha ul{margin:6px 0 0;padding-left:22px}
+  .ficha ol li, .ficha ul li{margin-bottom:5px}
+
+  /* GLOSARIO / TIPS */
+  .tip{background:#f5ede0;border-left:3px solid #c9a96e;border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:.9rem;color:#5a4a3a;line-height:1.65}
+  .tip strong{color:#a8893f}
+
+  /* SANKALPA BLOCK */
+  .sankalpa{background:#1a1f2e;border:1px solid #c9a96e;border-radius:14px;padding:34px 24px;text-align:center;margin:32px 0;color:#faf7f2}
+  .sankalpa .frase{font-family:Georgia,serif;font-style:italic;font-size:1.35rem;color:#faf7f2;line-height:1.6;margin:0}
+  .sankalpa .label{font-size:0.78rem;letter-spacing:3px;color:#c9a96e;text-transform:uppercase;margin-bottom:14px}
+
+  /* CARTA */
+  .carta{font-family:Georgia,serif;font-size:1.05rem;line-height:1.95;color:#1a1a2e}
+  .carta p{margin:0 0 16px}
+  .sec-night .carta, .sec-dark .carta{color:#faf7f2}
+  .firma{margin-top:24px;color:#c1704a;font-family:Georgia,serif;font-size:1.15rem}
+  .sec-night .firma, .sec-dark .firma{color:#c9a96e}
+
+  /* TABLA CALENDARIO */
+  .cal-tabla{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);font-size:0.88rem;margin:18px 0}
+  .cal-tabla thead{background:#2c3e50;color:#c9a96e}
+  .cal-tabla th{padding:11px 9px;text-align:left;font-family:Georgia,serif;font-weight:600;font-size:0.85rem}
+  .cal-tabla td{padding:11px 9px;border-bottom:1px solid #f0e7d8;vertical-align:top}
+  .cal-tabla tr:last-child td{border-bottom:0}
+  .cal-pill{padding:2px 9px;border-radius:14px;font-size:0.7rem;color:#fff;display:inline-block;font-weight:600}
+  .cal-tabla tr.yoga{border-left:5px solid #7a9e7e}
+  .cal-tabla tr.fuerza{border-left:5px solid #c1704a}
+  .cal-tabla tr.movilidad{border-left:5px solid #c9a96e}
+  .cal-tabla tr.calistenia{border-left:5px solid #2c3e50}
+  .cal-tabla tr.descanso{border-left:5px solid #888899}
+
+  /* DIARIO */
+  .diario{width:100%;border-collapse:collapse;background:#fff;font-size:0.85rem;margin-top:16px}
+  .diario th, .diario td{border:1px solid #d8cdb6;padding:10px;text-align:left;vertical-align:top}
+  .diario th{background:#1a1f2e;color:#c9a96e;font-family:Georgia,serif}
+  .diario .col1{background:#f5ede0;font-weight:600;width:160px}
+
+  /* HÁBITOS LISTA */
+  .habitos-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:18px}
+  .habito{background:#fff;border-radius:10px;padding:16px 18px;border-top:3px solid #7a9e7e}
+  .habito h4{margin:0 0 6px;color:#2c3e50;font-size:1.02rem}
+  .habito p{margin:0;font-size:0.88rem;color:#4a4a6a;line-height:1.6}
+
+  /* LECTURAS */
+  .libro{background:#fff;padding:14px 16px;margin:10px 0;border-radius:10px;border-left:4px solid #c9a96e}
+  .libro h4{margin:0 0 4px;color:#2c3e50;font-size:1rem}
+  .libro .aut{color:#8b7355;font-style:italic;font-size:0.85rem;margin:0 0 6px}
+  .libro p{margin:0;font-size:0.88rem;color:#4a4a6a;line-height:1.55}
+
+  /* RETOS */
+  .reto{background:#faf7f2;border-left:4px solid #c9a96e;border-radius:0 12px 12px 0;padding:18px 22px;margin:14px 0}
+  .reto h4{margin:0 0 4px;color:#2c3e50;font-size:1.05rem}
+  .reto .reto-xp{margin:0 0 12px;color:#a8893f;font-style:italic;font-size:0.85rem;font-weight:600}
+  .reto label{display:flex;align-items:flex-start;gap:9px;margin:7px 0;cursor:pointer;font-size:0.92rem;color:#4a4a6a;line-height:1.55}
+  .reto input[type="checkbox"]{margin-top:4px;flex-shrink:0;width:16px;height:16px;cursor:pointer;accent-color:#c1704a}
+
+  /* IMPRIMIR */
+  .btn-imprimir{position:fixed;bottom:24px;right:24px;background:#c1704a;color:#fff;border:0;padding:14px 22px;border-radius:30px;font-weight:600;cursor:pointer;font-size:0.95rem;box-shadow:0 6px 20px rgba(193,112,74,0.4);z-index:99;font-family:inherit;display:flex;align-items:center;gap:8px}
+  .btn-imprimir:hover{background:#a35a3a}
+
+  /* PRINT */
+  @media print{
+    .nav-sticky, #gamificacion, .btn-imprimir, .vid-link, button{display:none !important}
+    body{background:#fff}
+    section{page-break-inside:avoid;padding:30px 0}
+    .portada{padding:60px 24px}
+    .ficha{break-inside:avoid;box-shadow:none;border:1px solid #eee}
+    .reto{break-inside:avoid}
+    a{color:#000;text-decoration:none}
+    .sec-dark, .sec-night{background:#fff !important;color:#000 !important}
+    .sec-dark h2, .sec-night h2, .sankalpa, .portada{background:#f5ede0 !important;color:#1a1a2e !important;border:1px solid #c9a96e}
+    .sankalpa .frase, .portada h1, .portada .quien{color:#1a1a2e !important}
+    .carta{color:#1a1a2e !important}
+    .firma{color:#a35a3a !important}
+  }
+
+  @media (max-width:600px){
+    .portada h1{font-size:1.95rem}
+    section{padding:38px 16px}
+    section h2{font-size:1.5rem}
+    .btn-imprimir{bottom:14px;right:14px;padding:11px 18px;font-size:0.85rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MENÚ STICKY ============ -->
+<nav class="nav-sticky" aria-label="Navegación del programa">
+  <button class="nav-btn" onclick="irA('portada')">Inicio</button>
+  <button class="nav-btn" onclick="irA('bienvenida')">Bienvenida</button>
+  <button class="nav-btn" onclick="irA('mapa')">Mapa</button>
+  <button class="nav-btn" onclick="irA('perfil')">Perfil</button>
+  <button class="nav-btn" onclick="irA('pilar-yoga')">🧘 Yoga</button>
+  <button class="nav-btn" onclick="irA('pilar-fuerza')">💪 Fuerza</button>
+  <button class="nav-btn" onclick="irA('pilar-movilidad')">🌀 Movilidad</button>
+  <button class="nav-btn" onclick="irA('pilar-calistenia')">🤸 Calistenia</button>
+  <button class="nav-btn" onclick="irA('gamificacion')">🎮 Progreso</button>
+  <button class="nav-btn" onclick="irA('calendario')">📅 Calendario</button>
+  <button class="nav-btn" onclick="irA('habitos')">🌿 Hábitos</button>
+  <button class="nav-btn" onclick="irA('suplementacion')">🌱 Suplementación</button>
+  <button class="nav-btn" onclick="irA('lecturas')">📚 Lecturas</button>
+  <button class="nav-btn" onclick="irA('diario')">📖 Diario</button>
+  <button class="nav-btn" onclick="irA('despedida')">Despedida</button>
+</nav>
+
+<!-- ============ 1. PORTADA ============ -->
+<section id="portada" class="portada">
+  <div class="small">Kiko Martínez · Terapeuta Natural</div>
+  <div class="ornament"></div>
+  <h1>Programa Integral de Movimiento</h1>
+  <div class="subt">Cuatro pilares, un solo cuerpo</div>
+  <div class="quien">María José Monedero Solano</div>
+  <div style="color:#888899;font-size:0.85rem;letter-spacing:2px;margin-top:6px">RECOMPOSICIÓN · LONGEVIDAD · 47 años</div>
+  <div class="ornament"></div>
+  <div class="frase">"Tengo la calma y la fuerza que necesito.<br>Construyo cada día el cuerpo en el que quiero envejecer."</div>
+</section>
+
+<!-- ============ 2. CARTA DE BIENVENIDA ============ -->
+<section id="bienvenida" class="sec-light">
+<div class="wrap">
+  <h2>Bienvenida</h2>
+  <p class="sec-sub">Antes de los ejercicios, lo que necesito decirte.</p>
+
+  <div class="carta">
+    <p>María José, gracias por la confianza. Y enhorabuena: que una mujer de 47 años, instructora de yoga, con hipertensión bien controlada y la cabeza puesta en unos exámenes, decida sentarse a rellenar este cuestionario con la honestidad que tú lo has rellenado — eso ya dice mucho de cómo te cuidas y de lo que vas a ser capaz de hacer en las próximas seis semanas.</p>
+
+    <p>Tu cuerpo está en un sitio muy bueno: fuerza 8, movilidad 7, equilibrio 9, cardio 8. Te bajas al suelo y te levantas sin ayuda, te cuelgas de una barra, haces flexión completa. Eso es un punto de partida envidiable — y por eso este programa no va a ser un programa "para empezar". Va a ser un programa para <em>consolidar y profundizar</em>. Para que ese cuerpo capaz que ya tienes se vuelva un cuerpo de longevidad.</p>
+
+    <p>Pero hay tres cosas que he leído entre líneas y que van a guiar todo lo que sigue:</p>
+
+    <p>La primera: <strong>te cuesta perder peso</strong>. A los 47 años, en plena perimenopausia, esto no es debilidad ni falta de voluntad — es bioquímica. La estrategia que funciona ya no es "menos comida y más cardio". Es <strong>fuerza con cargas progresivas, proteína suficiente y manejo del cortisol</strong>. Eso es lo que vamos a hacer.</p>
+
+    <p>La segunda: <strong>ese dolor en la cara lateral de la pierna izquierda hasta el tobillo</strong>. No es casualidad. Tu cuerpo lleva años cargando con un esguince de tobillo no del todo cerrado, y eso ha tensado toda la cadena lateral — tensor de la fascia lata, banda iliotibial, peroneos. Tenemos un pilar entero dedicado a deshacer ese patrón con seguridad.</p>
+
+    <p>La tercera: <strong>el estrés de los exámenes y la tendencia mixta ansiedad-agotamiento</strong>. Aquí tu propia experiencia como instructora de yoga es una ventaja enorme — sabes lo que es respirar, sabes lo que es soltar. Pero también sabes que cuando una está dentro de su propio nudo, cuesta verlo. Por eso he integrado pranayama específico y Yoga Nidra clínico, no como "guinda", sino como herramienta estratégica para que llegues a los exámenes con la mente despejada.</p>
+
+    <p>Los <strong>cuatro pilares</strong> que vamos a trabajar son: yoga terapéutico (sistema nervioso y flexibilidad), fuerza funcional (recomposición y densidad ósea), movilidad y CORE profundo (para la cara lateral de tu pierna y la columna), y calistenia / movimiento natural (porque tu cuerpo tiene nivel para disfrutarlo de verdad).</p>
+
+    <p>Vas a ver tu progreso en una rueda radar de 6 dimensiones que se actualiza cada semana, un sistema de XP, medallas y racha. No es un juego — es la forma de hacer visible el progreso invisible. Porque el espejo y la báscula mienten en estos procesos. Los datos honestos, no.</p>
+
+    <p>Una cosa más, importante: <strong>esto no es una competición</strong>. Empieza por debajo de lo que crees poder hacer. Tu cuerpo ya sabe — solo necesita el espacio y el tiempo para mostrártelo.</p>
+
+    <p>Con todo el cariño y la convicción de que esto va a salir bien,</p>
+    <div class="firma">— Kiko</div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 3. MAPA DEL PROGRAMA ============ -->
+<section id="mapa" class="sec-warm" style="border-top:3px solid #c9a96e;border-bottom:3px solid #c9a96e">
+<div class="wrap">
+  <h2>Qué vas a encontrar en este programa</h2>
+  <p class="sec-sub">Un mapa para que sepas dónde estás en cada momento. Pulsa cualquier tarjeta para ir directamente.</p>
+
+  <div class="mapa-grid">
+    <button class="mapa-card" onclick="irA('perfil')" style="border-left:4px solid #c1704a"><strong>📍 Perfil Integral</strong><span>Cómo te he leído clínicamente y por qué he elegido este equilibrio</span></button>
+    <button class="mapa-card" onclick="irA('pilar-yoga')" style="border-left:4px solid #7a9e7e"><strong>🧘 Pilar Yoga</strong><span>Asanas, pranayama, Yoga Nidra y sankalpa personalizados</span></button>
+    <button class="mapa-card" onclick="irA('pilar-fuerza')" style="border-left:4px solid #c1704a"><strong>💪 Pilar Fuerza</strong><span>Recomposición corporal y densidad ósea con mancuernas y bandas</span></button>
+    <button class="mapa-card" onclick="irA('pilar-movilidad')" style="border-left:4px solid #c9a96e"><strong>🌀 Movilidad y CORE</strong><span>Ducha articular diaria + protocolo banda iliotibial</span></button>
+    <button class="mapa-card" onclick="irA('pilar-calistenia')" style="border-left:4px solid #2c3e50"><strong>🤸 Calistenia</strong><span>Movimiento natural a nivel intermedio-avanzado</span></button>
+    <button class="mapa-card" onclick="irA('gamificacion')" style="border-left:4px solid #c9a96e"><strong>🎮 Progreso</strong><span>XP, medallas, racha y rueda radar interactiva</span></button>
+    <button class="mapa-card" onclick="irA('calendario')" style="border-left:4px solid #c9a96e"><strong>📅 Calendario</strong><span>3 fases de 2 semanas con plan diario</span></button>
+    <button class="mapa-card" onclick="irA('habitos')" style="border-left:4px solid #7a9e7e"><strong>🌿 Hábitos</strong><span>Lo que sostiene el cuerpo entre sesiones</span></button>
+    <button class="mapa-card" onclick="irA('suplementacion')" style="border-left:4px solid #7a9e7e"><strong>🌱 Suplementación</strong><span>Fitoterapia segura con tu medicación antihipertensiva</span></button>
+    <button class="mapa-card" onclick="irA('lecturas')" style="border-left:4px solid #c9a96e"><strong>📚 Lecturas</strong><span>7 libros para acompañar tu proceso</span></button>
+    <button class="mapa-card" onclick="irA('diario')" style="border-left:4px solid #c9a96e"><strong>📖 Diario imprimible</strong><span>Tu espejo semanal de práctica</span></button>
+    <button class="mapa-card" onclick="irA('despedida')" style="border-left:4px solid #c1704a"><strong>💌 Despedida</strong><span>El mensaje que volverás a leer en días flojos</span></button>
+  </div>
+
+  <p style="text-align:center;color:#8b7355;font-size:0.92rem;margin-top:30px;font-style:italic">Recorrido completo de lectura inicial: 30-40 minutos.<br>Después, vuelve a las secciones que necesites cada día.</p>
+</div>
+</section>
+
+<!-- ============ 4. AVISO MÉDICO ============ -->
+<section id="aviso-medico" class="sec-light" style="padding:36px 20px">
+<div class="wrap">
+  <div class="aviso">
+    <div class="ico">⚕️</div>
+    <div>
+      <h3>Antes de empezar — léelo, por favor</h3>
+      <p>Este programa <strong>complementa la consulta presencial y NO sustituye ningún tratamiento médico, fisioterapéutico ni psicológico</strong>. Dado que tomas Manidipino y Candesartán para tu hipertensión, lleva este programa a tu médico de cabecera en tu próxima revisión — es lo correcto y lo seguro. Ante cualquier dolor agudo, mareo, palpitación inusual o síntoma nuevo durante la práctica, <strong>detén el ejercicio y consulta</strong>. Empieza siempre por debajo de lo que crees poder hacer: el progreso real viene de la constancia, no de la intensidad.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 5. PERFIL INTEGRAL ============ -->
+<section id="perfil" class="sec-light">
+<div class="wrap">
+  <h2>Tu Perfil Integral</h2>
+  <p class="sec-sub">Cómo te he leído antes de seleccionar ningún ejercicio. Todo lo que viene después se ha construido desde aquí.</p>
+
+  <div class="perfil-grid">
+    <div class="perfil-chip"><span class="k">Edad y composición</span><span class="v">47 años · 161 cm · 62 kg</span></div>
+    <div class="perfil-chip"><span class="k">Objetivo</span><span class="v">Recomposición + Longevidad</span></div>
+    <div class="perfil-chip"><span class="k">Patología clave</span><span class="v">HTA · Manidipino + Candesartán</span></div>
+    <div class="perfil-chip"><span class="k">Punto clínico activo</span><span class="v">Dolor cara lateral pierna izq.</span></div>
+    <div class="perfil-chip"><span class="k">Perfil del sistema nervioso</span><span class="v">Mixto · ansiedad / agotamiento</span></div>
+    <div class="perfil-chip"><span class="k">Capacidades</span><span class="v">F8 · M7 · Eq9 · Cardio8</span></div>
+    <div class="perfil-chip"><span class="k">Experiencia</span><span class="v">Yoga avanzado (instructora)</span></div>
+    <div class="perfil-chip"><span class="k">Tiempo disponible</span><span class="v">3 días · 20-30 min · tarde</span></div>
+  </div>
+
+  <h3 style="color:#2c3e50;margin-top:30px">Lectura clínica</h3>
+
+  <p>Tu cuerpo es un cuerpo entrenado y bien habitado. Esto no es un programa de iniciación — es un programa de <strong>consolidación inteligente</strong> diseñado para una persona que ya sabe escucharse, pero que está en una intersección biológica importante: <strong>perimenopausia + hipertensión + estrés cognitivo</strong>.</p>
+
+  <p>El dato más significativo del cuestionario para mí no es el dolor lateral de la pierna ni la HTA — es esta frase: <em>"me cuesta mucho perder peso"</em>. Esto, en una mujer de 47 años con buen nivel de actividad, es la firma de los cambios hormonales propios del climaterio temprano: caída progresiva de estradiol, aumento de la resistencia a la insulina, ralentización del metabolismo basal por pérdida silenciosa de masa muscular (sarcopenia incipiente). <strong>La respuesta correcta a esto no es comer menos ni correr más — es entrenar fuerza con cargas progresivas, mantener proteína alta (1.6-2 g/kg/día), y manejar el cortisol</strong>. Por eso el Pilar de Fuerza es el motor del programa.</p>
+
+  <div class="tip">
+    <strong>¿Qué es la perimenopausia y por qué cambia el cuerpo?</strong><br>
+    Es la fase de transición hormonal que precede a la menopausia, generalmente entre los 45 y los 55 años. Los niveles de estrógeno empiezan a fluctuar de forma irregular, lo que afecta a la distribución de la grasa (más abdominal), a la sensibilidad a la insulina y a la masa muscular. No es una enfermedad — es una etapa. Pero la estrategia de movimiento que servía antes ya no sirve igual.
+  </div>
+
+  <p>Tu <strong>dolor lateral de la pierna izquierda hasta el tobillo</strong> tiene una explicación biomecánica clara: el esguince de tobillo de hace dos años casi nunca cierra por completo — quedan microinestabilidades que la cadena lateral compensa. Cuando los <strong>peroneos</strong> (músculos del lateral de la pantorrilla, ligados al tobillo) y el <strong>glúteo medio</strong> (estabilizador lateral de la cadera) trabajan de más, la <strong>cintilla iliotibial</strong> (banda gruesa de fascia que recorre desde la cadera hasta debajo de la rodilla por el lateral) acaba sobrecargada y tira hasta el tobillo. Es el patrón clásico post-esguince. Vamos a abordarlo en tres frentes: liberación con foam roller, fortalecimiento del glúteo medio y propiocepción del tobillo.</p>
+
+  <div class="tip">
+    <strong>¿Qué es la cintilla o banda iliotibial?</strong><br>
+    Es una franja gruesa de tejido fibroso (fascia) que recorre la cara externa del muslo, desde la cadera hasta justo debajo de la rodilla. Funciona como una cincha estabilizadora. Cuando está demasiado tensa, da dolor en cadera, lateral del muslo, rodilla o, como en tu caso, irradia hasta el tobillo.
+  </div>
+
+  <p>Sobre tu <strong>perfil de sistema nervioso mixto</strong> (ansiedad alternando con agotamiento) y la <strong>antesala de los exámenes</strong>: tu trayectoria como instructora de yoga te ha dado herramientas que muchas clientas no tienen. Pero por esa misma cercanía, a veces se diluyen. He elegido específicamente <strong>Nadi Shodhana</strong> (respiración alternada por las fosas nasales) como pranayama protagonista — equilibra los hemisferios cerebrales, baja el cortisol y se ha investigado para mejorar el rendimiento cognitivo previo a exámenes. La cerramos con <strong>Yoga Nidra</strong> ("sueño yóguico", una práctica de relajación profunda guiada en posición tumbada) de 20 minutos, que se considera equivalente a 2-3 horas de sueño profundo en términos de regeneración del SN.</p>
+
+  <p>Y sobre tu <strong>hipertensión</strong>: bien medicada, no es un freno, es un mapa. El ejercicio aeróbico y de fuerza son <strong>antihipertensivos de primera línea</strong> avalados por la cardiología — el propio efecto del programa va a bajar tu tensión basal. Pero hay reglas estrictas: nunca contener la respiración en esfuerzo (maniobra de Valsalva), no isométricos prolongados, no inversiones largas tipo Sirsasana, evitar el pomelo (interacciona con tu Manidipino) y vigilar el regaliz, ginseng en altas dosis y efedra en cualquier infusión que tomes. Todo esto está desarrollado en el bloque de suplementación.</p>
+
+  <p>Por último, lo que <strong>no</strong> dice tu cuestionario pero leo entre líneas: el <strong>tabaco</strong> + <strong>poca agua</strong> + <strong>hipertensión</strong> es una tríada cardiovascular que merece tu atención sin culpa. No te voy a sermonear — eres adulta y profesional de la salud. Solo te lo dejo aquí, porque cualquier mejora en estas tres áreas multiplica los efectos del programa.</p>
+
+  <h3 style="color:#2c3e50;margin-top:26px">Por qué este equilibrio de los 4 pilares para ti</h3>
+
+  <div class="habitos-list">
+    <div class="habito" style="border-top-color:#7a9e7e"><h4>🧘 Yoga</h4><p>Lo conoces como instructora — aquí trabajamos las asanas que <em>tu</em> cuerpo necesita ahora (cadera, banda iliotibial, regulación SN), no las que enseñas.</p></div>
+    <div class="habito" style="border-top-color:#c1704a"><h4>💪 Fuerza</h4><p><strong>El motor del programa.</strong> Recomposición real en perimenopausia se gana aquí. Densidad ósea, masa muscular, sensibilidad a la insulina.</p></div>
+    <div class="habito" style="border-top-color:#c9a96e"><h4>🌀 Movilidad y CORE</h4><p>Ducha articular diaria (5-10 min) + protocolo específico para la cintilla iliotibial y el glúteo medio izquierdo.</p></div>
+    <div class="habito" style="border-top-color:#2c3e50"><h4>🤸 Calistenia</h4><p>Tu nivel da para Nivel 3 con incursiones al 4. Te va a sorprender lo que te divierte.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 6. PILAR 1 — YOGA TERAPÉUTICO ============ -->
+<section id="pilar-yoga" class="sec-light" style="border-top:4px solid #7a9e7e">
+<div class="wrap">
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+    <div style="font-size:2.4rem">🧘</div>
+    <div>
+      <div style="color:#7a9e7e;font-size:0.78rem;letter-spacing:3px;text-transform:uppercase;font-weight:600">Pilar 1</div>
+      <h2 style="margin:0">Yoga Terapéutico</h2>
+    </div>
+  </div>
+  <p class="sec-sub">El yoga no es la parte "blanda" del programa — es donde tu sistema nervioso aprende a regularse. En tu caso, además, es la herramienta clave para los exámenes.</p>
+
+  <div class="tip">
+    <strong>María José, sé que esto te sobra: ya enseñas yoga.</strong><br>
+    Pero he seleccionado específicamente las asanas que <em>tu</em> cuerpo necesita ahora — apertura de cadera para la banda iliotibial, apertura torácica para liberar el patrón de control, y dos asanas de regulación profunda del SN (Viparita Karani y Supta Baddha Konasana) que probablemente das poco a tus alumnos porque "no son espectaculares" — pero clínicamente son las más potentes.
+  </div>
+
+  <h3 style="color:#5a7d5e;margin-top:30px">🌬️ Pranayama personalizado</h3>
+  <p>Dos técnicas, cada una con su momento:</p>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Nadi Shodhana</h3>
+        <div class="sub">Respiración alternada por las fosas nasales · "purificación de los canales"</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura para ti</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Equilibra los hemisferios cerebrales, reduce el cortisol y mejora el rendimiento cognitivo previo a tareas mentales exigentes. Hay estudios específicos sobre su efecto en estudiantes antes de exámenes — exactamente tu caso. También tiene efecto antihipertensivo documentado.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Sentada cómoda, columna alargada. Pulgar derecho cierra la fosa nasal derecha.</li>
+        <li>Inhala por la fosa nasal izquierda durante 4 segundos.</li>
+        <li>Cierra ambas fosas con pulgar y anular. Pausa 2 segundos (sin forzar).</li>
+        <li>Libera la fosa derecha. Exhala por la derecha 6 segundos.</li>
+        <li>Inhala por la fosa derecha 4 segundos. Pausa breve. Exhala por la izquierda 6 segundos.</li>
+        <li>Eso es un ciclo completo. Continúa 8-10 ciclos.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Duración · Momento</strong>5 minutos · Cualquier momento del día, especialmente útil antes de estudiar y antes de la sesión de yoga.</div>
+    <div class="bloque"><strong>⚠️ Adaptación para tu HTA</strong>Mantén las pausas BREVES (2 segundos máximo). No retengas la respiración de forma prolongada (Kumbhaka largo) — está contraindicado en hipertensión.</div>
+  </article>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Respiración 4-7-8</h3>
+        <div class="sub">Técnica del Dr. Andrew Weil · activador parasimpático rápido</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura para ti</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Es la herramienta más rápida que existe para inducir el estado parasimpático antes de dormir. Tu sueño es excelente cuando llega, pero solo duermes 6-7h — esta técnica te ayuda a aprovechar al máximo cada hora.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Tumbada en la cama, lengua tocando suavemente el paladar detrás de los incisivos superiores.</li>
+        <li>Exhala todo el aire por la boca, haciendo un ligero sonido.</li>
+        <li>Cierra la boca. Inhala por la nariz contando hasta 4.</li>
+        <li>Retén el aire contando hasta 7 (sin tensión — si te marea, baja la cuenta).</li>
+        <li>Exhala completamente por la boca contando hasta 8, sonido suave.</li>
+        <li>Eso es un ciclo. Haz 4 ciclos. Solo 4 — si haces más, no funciona mejor.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Duración · Momento</strong>2 minutos · Justo antes de cerrar los ojos para dormir.</div>
+    <div class="bloque"><strong>⚠️ Adaptación para tu HTA</strong>Si la retención de 7 te marea, baja a 4-4-6 (esa proporción mantiene el efecto parasimpático sin retención larga). Lo importante es exhalar más tiempo que inhalas.</div>
+  </article>
+
+  <div class="tip" style="background:#fff3d8;border-left-color:#a35a3a">
+    <strong>⚠️ Pranayamas que YO DESCARTO para ti</strong><br>
+    Como instructora sabrás que algunos pranayamas no son inocuos. Para tu perfil (HTA medicada), descarto explícitamente: <strong>Kapalabhati</strong> (respiración de fuego), <strong>Bhastrika</strong> (fuelle) y cualquier <strong>Kumbhaka prolongado</strong> (retención >5 segundos). El subidón de tensión que provocan en los segundos iniciales es real y puede descompensar.
+  </div>
+
+  <h3 style="color:#5a7d5e;margin-top:36px">🪷 Biblioteca de asanas seleccionadas para ti</h3>
+  <p>Nueve asanas, ordenadas como una sesión completa. En tu modo express del pilar yoga, quédate con las cuatro marcadas con asterisco.</p>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Bitilasana–Marjaryasana ✶</h3>
+        <div class="sub">Postura del Gato y la Vaca · calentamiento espinal</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura para ti</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Articula toda la columna respiración a respiración. Masajea el sistema nervioso entérico (intestino) y prepara el cuerpo para todo lo que viene. Indispensable como inicio.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>A cuatro patas, muñecas bajo hombros, rodillas bajo caderas. Inhala: vaca (lleva el pubis y el pecho hacia arriba, mirada al techo). Exhala: gato (redondea la espalda, lleva el ombligo dentro, mirada al ombligo). Sigue ondulando.</div>
+    <div class="bloque"><strong>⚙️ Duración · Respiraciones</strong>8-12 respiraciones lentas, sin prisa</div>
+    <div class="bloque"><strong>🌿 Conexión cuerpo-emoción</strong>La ondulación libera la rigidez del control. Permítete moverte un poco "fuera de la cuadrícula" — pequeños círculos, ondas laterales.</div>
+  </article>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Anjaneyasana</h3>
+        <div class="sub">Media Luna Baja · postura del corredor</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Elonga el psoas ilíaco — el músculo del miedo y de la lucha-huida. Especialmente importante para ti porque el patrón de estrés sostenido (estudio + trabajo) acorta los flexores de cadera. Además, abre el lateral de la cadera, complementando el protocolo de banda iliotibial.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>Desde cuadrupedia, lleva el pie derecho entre las manos. Rodilla derecha alineada sobre el tobillo. Rodilla izquierda apoyada en la esterilla (usa manta si te molesta). Hunde la cadera suavemente hacia delante y abajo. Brazos arriba si te resulta cómodo. Mantén.</div>
+    <div class="bloque"><strong>⚙️ Duración</strong>6-8 respiraciones por lado</div>
+    <div class="bloque"><strong>⚠️ Adaptación para tu pierna izquierda</strong>Cuando la rodilla izquierda esté apoyada (pierna derecha delante), atiende a si tira en el lateral del muslo izquierdo. Si tira, retrasa un poco la rodilla y reduce el hundimiento de cadera.</div>
+  </article>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Eka Pada Rajakapotasana (variante suave)</h3>
+        <div class="sub">Paloma · "Pigeon" para la cintilla iliotibial</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem a">🟡 Con adaptación</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>ESTA es la asana protagonista del protocolo banda iliotibial. Abre el glúteo medio, el piriforme y la cápsula posterior de la cadera. En tu caso, hazla con foco en la pierna IZQUIERDA delante (que es la que tira).</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo (versión clínica adaptada)</strong>
+      <ol>
+        <li>Desde cuadrupedia, lleva la rodilla izquierda hacia la muñeca izquierda.</li>
+        <li>El tobillo izquierdo apunta hacia la cadera derecha (la tibia no tiene que ser paralela al borde de la esterilla — eso solo si tu cadera lo permite).</li>
+        <li>Extiende la pierna derecha atrás, empeine apoyado, cadera derecha mirando al suelo.</li>
+        <li>Coloca una manta DOBLADA bajo el glúteo izquierdo si la cadera se queda en el aire — clave para que el peso no caiga en la rodilla.</li>
+        <li>Tronco erguido o reposando hacia delante sobre los antebrazos.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Duración</strong>2-3 minutos por lado en versión Yin. Dedica más tiempo al lado izquierdo (3 min) que al derecho (2 min) durante las 6 semanas.</div>
+    <div class="bloque"><strong>⚠️ Adaptación importante</strong>NO bajes el tronco si sientes pinchazo en el lateral de la rodilla izquierda. Mantén el tronco más erguido y respira en la cadera. La sensación correcta es "estiramiento profundo en el glúteo medio izquierdo", no dolor articular en la rodilla.</div>
+  </article>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Anahatasana</h3>
+        <div class="sub">Postura del Corazón Extendido · Puppy Pose</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Apertura del espacio interescapular y pectoral. Contrarresta horas de pantalla (administrativa) y abre el espacio respiratorio — clave para que tu pranayama rinda más. Activa el parasimpático.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>Desde cuadrupedia, camina las manos hacia delante manteniendo las caderas sobre las rodillas. Lleva el pecho hacia el suelo — frente sobre bloque o suelo, según comodidad. Brazos activos, presión de las palmas contra el suelo.</div>
+    <div class="bloque"><strong>⚙️ Duración</strong>3-5 minutos (versión Yin), 5-8 respiraciones (versión Hatha activa)</div>
+    <div class="bloque"><strong>🌿 Conexión cuerpo-emoción</strong>Esta postura combina rendición (frente al suelo) con apertura del pecho. Es de las más útiles para personas con alta responsabilidad mental. Respira hacia la zona entre los omóplatos.</div>
+  </article>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Setu Bandha Sarvangasana ✶</h3>
+        <div class="sub">Postura del Puente · seguro en HTA</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Es la inversión SEGURA para hipertensión (la cabeza queda por debajo del corazón solo levemente). Trabaja glúteos (motor de la recomposición corporal), elonga el psoas y abre el pecho. Doble función: terapéutica y fortalecedora.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>Tumbada boca arriba, rodillas dobladas, pies anchura de caderas, talones cerca de los glúteos. Brazos a lo largo del cuerpo. Inhala: empuja los pies contra el suelo y eleva la cadera. Hombros y nuca relajados en el suelo. Aguanta o sube-baja con la respiración.</div>
+    <div class="bloque"><strong>⚙️ Duración</strong>Versión activa: 6-8 respiraciones aguantando. Versión restaurativa: pon un bloque (altura media) bajo el sacro y mantén 3-5 minutos pasivamente.</div>
+    <div class="bloque"><strong>⚠️ Adaptación para tu HTA</strong>NO presiones la barbilla contra el pecho. Mantén la nuca larga y la mirada al techo. Exhala al subir, inhala al bajar. No retengas la respiración arriba.</div>
+  </article>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Viparita Karani ✶</h3>
+        <div class="sub">Las Piernas en la Pared · la inversión que SÍ puedes hacer</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · ALTAMENTE recomendada</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Las inversiones largas mantenidas (Sirsasana, Sarvangasana completa) están contraindicadas en HTA. Pero Viparita Karani sí — porque las caderas quedan elevadas pero los hombros y la cabeza no se cargan. Es uno de los activadores parasimpáticos más potentes que existen, baja el cortisol y mejora el retorno venoso (importante para la pierna que te molesta).</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>Tumbada al lado de una pared. Gira: glúteo contra la pared y piernas verticales sobre ella. Brazos a los lados o en T. Coloca una manta doblada bajo la cadera si quieres más comodidad. Respira lento.</div>
+    <div class="bloque"><strong>⚙️ Duración</strong>5-12 minutos. Si tienes solo 5 minutos para "hacer algo" un día — haz esto.</div>
+    <div class="bloque"><strong>🌿 Conexión cuerpo-emoción</strong>Es el "reset" simbólico: invertir la perspectiva, dejar de controlar desde arriba. Especialmente útil después de jornadas largas de estudio.</div>
+  </article>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Supta Baddha Konasana</h3>
+        <div class="sub">Diosa Reclinada · regulación máxima del SN</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Apertura pasiva de aductores y diafragma. Postura de máxima activación parasimpática. Para alguien con tu perfil mixto ansiedad-agotamiento, es exactamente lo que tu SN necesita 2 veces por semana.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>Tumbada boca arriba. Junta las plantas de los pies, deja que las rodillas caigan hacia los lados. Coloca un bloque o cojín DEBAJO de cada rodilla (no fuerces). Brazos relajados a los lados, palmas hacia arriba.</div>
+    <div class="bloque"><strong>⚙️ Duración</strong>5-10 minutos. Cuanto más tiempo, más profundo el efecto.</div>
+    <div class="bloque"><strong>🌿 Conexión cuerpo-emoción</strong>Apertura de cadera + exposición ventral = postura de vulnerabilidad y confianza. Para una persona con alta carga de responsabilidad como tú, es un permiso necesario.</div>
+  </article>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Jathara Parivartanasana</h3>
+        <div class="sub">Torsión Supina · escurrir lo acumulado</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Torsión suave de columna y cintilla iliotibial. Estimula el nervio vago. Y libera la zona lumbar donde acumulamos el estrés crónico. Es una de las asanas donde más se libera tu cara lateral de la pierna izquierda.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>Tumbada boca arriba. Lleva las rodillas al pecho. Estira los brazos en T. Deja caer ambas rodillas hacia la derecha mientras giras la cabeza a la izquierda. Mantén el omóplato izquierdo intentando bajar al suelo. Cambia.</div>
+    <div class="bloque"><strong>⚙️ Duración</strong>2-3 minutos por lado (versión Yin)</div>
+    <div class="bloque"><strong>⚠️ Adaptación para tu pierna izquierda</strong>Cuando las rodillas caigan hacia la DERECHA (girando el lado izquierdo de tu cadera hacia el techo), puedes notar tirar en el lateral del muslo izquierdo. Coloca un cojín entre las rodillas y permítete reducir el rango.</div>
+  </article>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Savasana ✶</h3>
+        <div class="sub">Postura del Cadáver · NUNCA omitir</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Integración neurológica de toda la sesión. La asana donde el sistema nervioso "guarda" lo aprendido. Para perfiles ansiosos como el tuyo, es la más difícil — no hacer nada — y por eso la más necesaria.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>Tumbada boca arriba, brazos ligeramente separados del cuerpo, palmas arriba. Pies caen naturalmente hacia los lados. Manta bajo las rodillas si tu lumbar la pide. Cierra los ojos. Suelta el peso del cuerpo en el suelo. Suelta el peso de la mandíbula. Suelta el peso de los ojos.</div>
+    <div class="bloque"><strong>⚙️ Duración</strong>Mínimo 8 minutos al final de cada sesión. Óptimo: 10-15 min.</div>
+  </article>
+
+  <h3 style="color:#5a7d5e;margin-top:36px">🌙 Yoga Nidra · una vez por semana</h3>
+
+  <article class="ficha yoga">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar yoga">🧘 Pilar 1 · Yoga</span>
+        <h3>Sesión guiada de Yoga Nidra</h3>
+        <div class="sub">Sueño yóguico · 20-30 minutos</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · ESENCIAL para tus exámenes</span></div>
+    </div>
+    <div class="tip">
+      <strong>¿Qué es exactamente el Yoga Nidra?</strong><br>
+      Es una práctica de relajación profunda guiada en posición tumbada. No hay movimiento — solo escuchas una voz que te lleva por un recorrido sistemático del cuerpo, la respiración, las sensaciones y las imágenes. Te quedas en el umbral entre el sueño y la vigilia, donde el sistema nervioso se regenera de forma muy profunda. Estudios muestran que 20 minutos equivalen a 2-3 horas de sueño profundo en términos de descanso del SN.
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Es tu herramienta antiexámenes. La memoria a largo plazo se consolida durante el sueño profundo y los estados similares (como el Nidra). Una sesión semanal en estas 6 semanas va a darte un plus de claridad mental que vas a notar.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>Tumbada boca arriba, manta bajo rodillas, manta encima del cuerpo (sensación de "cobijada" — activa el SN parasimpático). Pon una sesión guiada de 20-30 min (recurso fiable abajo). No te duermas si puedes evitarlo — el objetivo es quedarse en el umbral consciente.</div>
+    <div class="bloque"><strong>⚙️ Cuándo hacerlo</strong>Una vez por semana, preferentemente entre las 17h y las 19h (tu horario preferido) o antes de dormir si vienes muy activada. NO inmediatamente después de comer.</div>
+  </article>
+
+  <h3 style="color:#5a7d5e;margin-top:36px">📿 Tu Sankalpa</h3>
+  <p>Una <strong>sankalpa</strong> es una intención breve que se repite mentalmente al inicio de cada sesión. No es un deseo — es una afirmación que siembra una dirección en el subconsciente. La que he elegido para ti es ambigua a propósito: vale para los exámenes y vale para la recomposición física. Repítela mentalmente 3 veces al inicio de cada sesión y 3 veces durante Savasana.</p>
+
+  <div class="sankalpa">
+    <div class="label">SANKALPA DEL PROGRAMA</div>
+    <p class="frase">"Tengo la calma y la fuerza que necesito.<br>Construyo cada día el cuerpo en el que quiero envejecer."</p>
+  </div>
+</div>
+</section>
+
+<!-- ============ 7. PILAR 2 — FUERZA FUNCIONAL ============ -->
+<section id="pilar-fuerza" class="sec-light" style="border-top:4px solid #c1704a">
+<div class="wrap">
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+    <div style="font-size:2.4rem">💪</div>
+    <div>
+      <div style="color:#c1704a;font-size:0.78rem;letter-spacing:3px;text-transform:uppercase;font-weight:600">Pilar 2</div>
+      <h2 style="margin:0">Fuerza Funcional</h2>
+    </div>
+  </div>
+  <p class="sec-sub">El motor del programa. Sin músculo no hay recomposición real ni longevidad.</p>
+
+  <div class="tip">
+    <strong>¿Por qué la fuerza es prioritaria para ti AHORA?</strong><br>
+    A los 47, en perimenopausia, perdemos masa muscular a un ritmo de hasta el 1% al año si no entrenamos fuerza. Eso se llama <strong>sarcopenia</strong> — la pérdida progresiva de masa y fuerza muscular asociada a la edad. Cada kilo de músculo extra quema 40-80 kcal al día EN REPOSO y mejora dramáticamente la sensibilidad a la insulina. La fuerza es, literalmente, el antídoto bioquímico contra el "me cuesta perder peso".
+  </div>
+
+  <h3 style="color:#a35a3a;margin-top:30px">⚙️ Tu pilar de fuerza: dos rutinas alternantes</h3>
+  <p>Alternarás <strong>Rutina A</strong> y <strong>Rutina B</strong>. Entre las dos cubrimos los 7 patrones esenciales (empujón vertical y horizontal, tracción vertical y horizontal, dominante de rodilla, dominante de cadera, CORE). En cada sesión, 6 ejercicios. Tiempo total: 25-30 min.</p>
+
+  <div class="habitos-list" style="margin-bottom:24px">
+    <div class="habito" style="border-top-color:#c1704a">
+      <h4>Rutina A — "Vertical & Centro"</h4>
+      <p>Press hombros · Sentadilla goblet · Remo mancuerna · Glute bridge una pierna · Pallof press · Hipopresivos</p>
+    </div>
+    <div class="habito" style="border-top-color:#c1704a">
+      <h4>Rutina B — "Horizontal & Lateral"</h4>
+      <p>Press pecho banda · Peso muerto rumano · Jalón banda · Zancada · Abducción cadera · Plancha lateral</p>
+    </div>
+  </div>
+
+  <div class="tip" style="background:#fff3d8;border-left-color:#a35a3a">
+    <strong>⚠️ Reglas clave de seguridad para ti (HTA)</strong><br>
+    <strong>1.</strong> NUNCA contengas la respiración en el esfuerzo (maniobra de Valsalva). <strong>Exhala SIEMPRE al subir / en el esfuerzo</strong>, inhala en la bajada.<br>
+    <strong>2.</strong> Trabaja con <strong>RIR 2-3</strong>: si haces 10 reps, deberías poder hacer 2-3 más con buena técnica. NO al fallo.<br>
+    <strong>3.</strong> Descansos largos: 90-120 segundos. La tensión arterial baja mejor con descansos completos.<br>
+    <strong>4.</strong> Si sientes mareo, palpitaciones inusuales o presión en el pecho, PARA inmediatamente.
+  </div>
+
+  <h3 style="color:#a35a3a;margin-top:34px;border-bottom:2px solid #c1704a;padding-bottom:8px">RUTINA A · Vertical & Centro</h3>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>A1 · Press de hombros con mancuernas</h3>
+        <div class="sub">Patrón: empujón vertical · Shoulder Press</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Deltoides, trapecio superior, tríceps y CORE estabilizador. Uno de los ejercicios más completos para mantener una postura erguida cuando llevas horas sentada.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>De pie o sentada en silla con respaldo. Pies anchura caderas, transverso activo.</li>
+        <li>Mancuernas (3-4 kg) a altura de hombros, palmas hacia delante.</li>
+        <li>Inhala. <strong>Exhala</strong> mientras empujas arriba sin bloquear codos del todo.</li>
+        <li>Inhala bajando controlada en 3 segundos.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 10-12 reps · Tempo 3-1-1 · Descanso 90 s · RIR 2-3</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Sem 1-2: 3 kg. Sem 3-4: 4 kg si haces 3×12 perfectas. Sem 5-6: 5 kg si sigue cómodo.</div>
+    <div class="bloque"><strong>⚠️ Vigila</strong>Que las costillas no se abran hacia delante al subir (signo de extensión lumbar). Mantén las costillas "cerradas".</div>
+  </article>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>A2 · Sentadilla goblet con mancuerna</h3>
+        <div class="sub">Patrón: dominante de rodilla · Goblet Squat</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Cuádriceps, glúteos, isquiotibiales, CORE. El ejercicio rey para piernas y la base de la recomposición corporal. Mejora densidad ósea en cadera y columna.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>De pie, pies anchura de hombros, puntas ligeramente hacia fuera.</li>
+        <li>Sostén la mancuerna (4-5 kg) pegada al pecho, como una "copa", con ambas manos.</li>
+        <li>Inhala. Baja como sentándote en una silla baja, llevando las caderas atrás y abajo.</li>
+        <li>Baja hasta donde tu cadera te permita sin redondear lumbar (idealmente muslos paralelos al suelo).</li>
+        <li><strong>Exhala</strong> mientras subes empujando con los talones.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 10-12 reps · Tempo 3-0-1 · Descanso 90-120 s · RIR 2-3</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Sem 1-2: 4 kg. Sem 3-4: 5 kg. Sem 5-6: añade pausa de 2 s abajo (tempo 3-2-1) o sube a 6 kg si tienes.</div>
+    <div class="bloque"><strong>⚠️ Vigila</strong>Que las rodillas no caigan hacia dentro (signo de glúteo medio débil — exactamente lo que estamos corrigiendo). Si pasa, abre las puntas un poco más y piensa en "abrir el suelo con los pies".</div>
+  </article>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>A3 · Remo con mancuerna a una mano</h3>
+        <div class="sub">Patrón: tracción horizontal · Single-Arm Row</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Dorsal ancho, romboides, trapecio medio, bíceps y CORE anti-rotación. Antagonista de horas de pantalla — devuelve los hombros a su sitio.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Rodilla y mano izquierdas apoyadas en silla robusta o banco. Mano derecha sostiene la mancuerna (4-5 kg) colgando.</li>
+        <li>Columna larga, neutra, paralela al suelo. Mirada al suelo.</li>
+        <li>Inhala. <strong>Exhala</strong> mientras tiras de la mancuerna hacia tu cintura, codo arriba-atrás, juntando escápula.</li>
+        <li>Inhala bajando controlada.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 10-12 reps por lado · Tempo 2-1-2 · Descanso 90 s</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Sem 1-2: 4 kg. Sem 5-6: 5-6 kg.</div>
+    <div class="bloque"><strong>⚠️ Vigila</strong>NO rotar el torso al subir la mancuerna — el CORE tiene que estabilizar para que solo se mueva el brazo y la escápula.</div>
+  </article>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>A4 · Glute bridge a una pierna</h3>
+        <div class="sub">Patrón: dominante de cadera · Single-leg Glute Bridge</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem a">🟡 Con adaptación para tu pierna izquierda</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Glúteo mayor y MEDIO (clave para tu cintilla iliotibial), isquiotibiales, CORE. Trabajado a una pierna, expone y corrige el desequilibrio entre el lado derecho (fuerte) y el izquierdo (compensador).</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Tumbada boca arriba, rodillas dobladas, pies anchura caderas pegados al suelo.</li>
+        <li>Extiende una pierna recta hacia el techo (o mantenla flotando con rodilla doblada si no llegas).</li>
+        <li>Inhala. <strong>Exhala</strong> empujando con el talón apoyado para subir la cadera hasta línea recta hombro-cadera-rodilla.</li>
+        <li>Aguanta 1-2 s arriba apretando glúteo. Inhala bajando.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 10 reps por lado · Tempo 2-2-2 · Descanso 60-90 s</div>
+    <div class="bloque"><strong>⚠️ Adaptación importante para ti</strong>Empieza con el lado IZQUIERDO (apoyando el pie izquierdo, extendiendo el derecho hacia arriba). Es probable que notes la cadera "torcida" al subir — es el glúteo medio izquierdo pidiendo trabajo. Haz una repetición más en el lado izquierdo cada serie hasta que iguale al derecho.</div>
+  </article>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>A5 · Pallof Press con banda elástica</h3>
+        <div class="sub">Patrón: CORE anti-rotación</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · perfecta para tu HTA</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Trabaja el CORE de forma <em>funcional</em> (anti-rotación, que es como el CORE trabaja en la vida real), sin flexión espinal ni Valsalva. Activa transverso, oblicuos profundos, multífidos. Probablemente el mejor ejercicio de CORE para tu perfil HTA.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Ancla la banda a la altura del esternón (pomo de puerta, columna, valla).</li>
+        <li>De pie de LADO al anclaje, banda con tensión. Banda agarrada con ambas manos pegada al esternón.</li>
+        <li>Pies anchura caderas, transverso activo, glúteos activos.</li>
+        <li><strong>Exhala</strong> mientras extiendes los brazos al frente. La banda intenta torcerte hacia su lado — tú resistes esa rotación.</li>
+        <li>Inhala volviendo al pecho.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 10 reps por lado · Tempo 2-2-2 · Descanso 60 s</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Aumentar la resistencia de la banda (de roja a verde) o alejarse más del anclaje.</div>
+  </article>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>A6 · Hipopresivos básicos</h3>
+        <div class="sub">Técnica novedosa · CORE profundo + suelo pélvico</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · IMPORTANTE post-mioma</span></div>
+    </div>
+    <div class="tip">
+      <strong>¿Qué son los hipopresivos?</strong><br>
+      Son una técnica desarrollada en los años 80 por el Dr. Marcel Caufriez basada en la apnea espiratoria (exhalas todo el aire, mantienes sin inspirar y "abres" las costillas como si quisieras inspirar — pero sin meter aire). Esto produce una succión visceral que <strong>tonifica el suelo pélvico y el transverso del abdomen sin presión intraabdominal</strong>. Es la técnica de elección post-cirugía abdominal (como tu mioma extirpado en 2021) y para mujeres en perimenopausia, donde el suelo pélvico empieza a perder tono por la caída hormonal.
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Trabaja exactamente lo que los abdominales clásicos NO trabajan: el suelo pélvico, el transverso profundo y la postura visceral. Mejora la cintura de forma estructural (no por quemar grasa, sino por reposicionar las vísceras). Y es completamente segura con tu HTA porque NO hay Valsalva — es lo contrario.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo (postura básica: Athena de pie)</strong>
+      <ol>
+        <li>De pie, pies anchura caderas, rodillas semi-flexionadas, peso ligeramente hacia delante.</li>
+        <li>Brazos arqueados delante del cuerpo, codos abiertos, palmas hacia abajo, sin tocar las costillas.</li>
+        <li>Coronilla hacia el techo, doble mentón (autocrecimiento).</li>
+        <li><strong>Inhala 2 segundos por la nariz</strong>, expandiendo las costillas.</li>
+        <li><strong>Exhala 4 segundos por la boca</strong>, vaciando el aire SUAVE y completo.</li>
+        <li><strong>Apnea espiratoria</strong>: cerrada la glotis (como si fueras a hablar pero sin sonido), abre las costillas hacia los lados como si fueras a inspirar — pero NO entra aire. El ombligo se va dentro y arriba SOLO.</li>
+        <li>Mantén la apnea 8-10 segundos. Inhala. Descansa.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Repeticiones</strong>3 series × 3 apneas de 8-10 s · Descanso 30 s entre apneas, 1-2 min entre series</div>
+    <div class="bloque"><strong>⚠️ Adaptación importante para tu HTA</strong>Empieza con apneas CORTAS (5-6 segundos) las dos primeras semanas. Si notas mareo o presión en la cabeza, baja a 3 segundos o suspende y consulta. NO los hagas tras comer.</div>
+  </article>
+
+  <h3 style="color:#a35a3a;margin-top:34px;border-bottom:2px solid #c1704a;padding-bottom:8px">RUTINA B · Horizontal & Lateral</h3>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>B1 · Press de pecho con banda elástica</h3>
+        <div class="sub">Patrón: empujón horizontal · Chest Press</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Pectoral, deltoides anterior, tríceps y CORE anti-extensión. Trabaja en cadena cerrada (los brazos llevan la carga sin que el cuerpo gire) — perfecto para complementar al press de hombros.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Ancla la banda (verde o azul) a la altura del pecho, detrás de ti.</li>
+        <li>De pie de espaldas al anclaje, banda en cada mano a altura del pecho, codos a 90° pegados al cuerpo.</li>
+        <li>Una pierna ligeramente adelantada para estabilidad.</li>
+        <li>Inhala. <strong>Exhala</strong> empujando hacia delante extendiendo los codos sin bloquearlos.</li>
+        <li>Inhala volviendo controlada en 3 segundos.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 12-15 reps · Tempo 3-0-1 · Descanso 60-90 s · RIR 2-3</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Pasar a banda más fuerte (azul → negra) cuando completes 3×15 sin esfuerzo máximo.</div>
+  </article>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>B2 · Peso muerto rumano con mancuernas</h3>
+        <div class="sub">Patrón: dominante de cadera · Romanian Deadlift</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Isquiotibiales, glúteos, erectores espinales, CORE. Es uno de los ejercicios más completos para la cadena posterior — clave para revertir la postura sedentaria y construir la "espalda fuerte" que protege la columna.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>De pie, pies anchura caderas. Mancuernas (4-5 kg cada una) delante de los muslos, palmas hacia ti.</li>
+        <li>Rodillas <em>ligeramente</em> flexionadas y FIJAS — no se mueven en todo el ejercicio.</li>
+        <li>Inhala. Bisagra de cadera HACIA ATRÁS (no flexión de rodilla): manda los glúteos atrás como si cerraras una puerta con la cadera.</li>
+        <li>Baja las mancuernas pegadas a las piernas hasta sentir TENSIÓN (no dolor) en los isquiotibiales. Para la mayoría de la gente, eso son las espinillas — no más bajo.</li>
+        <li><strong>Exhala</strong> subiendo apretando glúteos.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 10-12 reps · Tempo 3-1-1 · Descanso 90-120 s · RIR 2-3</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Sem 1-2: 4 kg. Sem 3-4: 5 kg. Sem 5-6: añadir 1-2 reps por serie antes de subir peso.</div>
+    <div class="bloque"><strong>⚠️ Vigila</strong>NUNCA redondear la espalda baja. Si la sientes redondear, sube las mancuernas antes y baja menos. La columna debe estar ALARGADA todo el rango.</div>
+  </article>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>B3 · Jalón vertical con banda elástica</h3>
+        <div class="sub">Patrón: tracción vertical · Lat Pulldown</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Dorsal ancho, trapecio medio e inferior, romboides, bíceps. Es el sustituto seguro de la dominada que ya puedes hacer (¡20 s colgada!) pero que trabajamos con menos carga puntual y más control técnico.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Ancla la banda en lo alto (puerta, marco, viga). Dos extremos en cada mano.</li>
+        <li>De rodillas en la esterilla o sentada. Brazos extendidos hacia arriba, ligera tensión inicial.</li>
+        <li>Inhala. <strong>Exhala</strong> tirando hacia abajo hasta llevar las manos a la altura del pecho, codos cerca del torso.</li>
+        <li>Aprieta escápulas al final del recorrido. Inhala soltando controlada.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 12-15 reps · Tempo 2-1-2 · Descanso 60-90 s</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Pasar a dominada negativa: con silla, sube por encima de la barra, suelta el apoyo y baja muy lento (6-8 s). 3 × 3-5 reps.</div>
+  </article>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>B4 · Zancada caminando con mancuernas</h3>
+        <div class="sub">Patrón: dominante de rodilla unilateral · Walking Lunge</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem a">🟡 Atenta a la pierna izquierda</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Cuádriceps, glúteos, isquiotibiales y EQUILIBRIO unilateral. Expone diferencias entre piernas y las corrige.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>De pie, una mancuerna (3-4 kg) en cada mano colgando a los lados. Postura erguida.</li>
+        <li>Inhala. Da un paso largo hacia delante con el pie derecho. Baja la rodilla trasera hacia el suelo sin tocarlo (ángulos 90°-90°).</li>
+        <li><strong>Exhala</strong> empujando con el talón delantero para volver al centro.</li>
+        <li>Cambia de pierna. Continúa caminando alternando.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 10 zancadas (5 por pierna) · Tempo 3-0-1 · Descanso 90 s</div>
+    <div class="bloque"><strong>⚠️ Adaptación para tu pierna izquierda</strong>Si al pisar con la pierna izquierda notas inestabilidad o que la rodilla cae hacia dentro: PARA, retrocede el peso, y haz primero unas semanas de "zancada estática" con apoyo de mano en pared antes de pasar a la caminando. La estabilidad lateral viene del glúteo medio — el que estamos fortaleciendo en paralelo.</div>
+  </article>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>B5 · Abducción de cadera con banda elástica</h3>
+        <div class="sub">Glúteo medio · LA estrella de tu protocolo banda iliotibial</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · CLAVE para ti</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Trabaja específicamente el GLÚTEO MEDIO (el músculo que estabiliza la cadera en el plano lateral). Cuando el glúteo medio está débil, la cintilla iliotibial compensa — y aparece tu dolor exterior de pierna. Fortalecerlo es el remedio causal.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo (variante tumbada · clamshell)</strong>
+      <ol>
+        <li>Banda corta circular (mini-band) alrededor de los muslos, justo por encima de las rodillas.</li>
+        <li>Tumbada de lado, rodillas dobladas a 90°, una sobre la otra.</li>
+        <li>Sin separar los pies, abre la rodilla de arriba SEPARÁNDOLA contra la resistencia de la banda. Como una almeja que se abre.</li>
+        <li>Aguanta 1-2 s en máxima apertura. Vuelve controlada.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 15-20 reps por lado · Tempo 2-2-2 · Descanso 60 s</div>
+    <div class="bloque"><strong>⚠️ Empieza por el lado IZQUIERDO</strong>Es el que más necesita trabajo. Notarás que se cansa antes que el derecho — esa es exactamente la asimetría que estamos corrigiendo. Haz alguna repetición extra en el lado débil hasta igualar.</div>
+  </article>
+
+  <article class="ficha fuerza">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar fuerza">💪 Pilar 2 · Fuerza</span>
+        <h3>B6 · Plancha lateral con elevación de cadera</h3>
+        <div class="sub">CORE oblicuo · estabilizador lateral</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Oblicuos profundos, transverso, glúteo medio y cuadrado lumbar. Ejercicio fundamental para la estabilidad lateral del tronco y la pelvis — directamente conectado con tu cintilla iliotibial.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Tumbada de lado, codo bajo el hombro, antebrazo apoyado.</li>
+        <li>Pies apilados o uno delante del otro. Cuerpo en línea recta.</li>
+        <li>Sube la cadera del suelo formando una línea recta hombro-cadera-tobillo. Aguanta 3-5 s.</li>
+        <li>Baja la cadera al suelo controlada (sin descansar del todo) y sube otra vez.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Descanso</strong>3 × 8-10 elevaciones por lado · Descanso 60 s</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Cuando 3×10 sea cómodo: plancha lateral estática 30-45 s por lado.</div>
+    <div class="bloque"><strong>⚠️ Adaptación si la muñeca o el hombro molestan</strong>Hacer con rodillas apoyadas (versión simplificada).</div>
+  </article>
+</div>
+</section>
+
+<!-- ============ 8. PILAR 3 — MOVILIDAD Y CORE PROFUNDO ============ -->
+<section id="pilar-movilidad" class="sec-warm" style="border-top:4px solid #c9a96e">
+<div class="wrap">
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+    <div style="font-size:2.4rem">🌀</div>
+    <div>
+      <div style="color:#a8893f;font-size:0.78rem;letter-spacing:3px;text-transform:uppercase;font-weight:600">Pilar 3</div>
+      <h2 style="margin:0">Movilidad y CORE Profundo</h2>
+    </div>
+  </div>
+  <p class="sec-sub">Cinco a diez minutos diarios de este pilar hacen más por tu bienestar que cualquier otra cosa del programa.</p>
+
+  <div class="tip">
+    <strong>Tres conceptos clave que vas a usar mucho aquí:</strong><br>
+    <strong>Flexibilidad vs movilidad</strong>: Flexibilidad es rango pasivo (estirar). Movilidad es rango ACTIVO con control. La movilidad es lo que el cuerpo usa en la vida real.<br>
+    <strong>CORE profundo vs CORE superficial</strong>: el profundo (transverso, multífidos, diafragma, suelo pélvico) estabiliza la columna como un corsé natural. El superficial (recto abdominal, oblicuos externos) genera movimiento. NO son los abdominales "de espejo" — son los que de verdad protegen tu espalda.<br>
+    <strong>CARs</strong> (rotaciones articulares controladas): movimientos circulares lentos en el rango máximo de una articulación. La mejor "higiene articular" diaria.
+  </div>
+
+  <h3 style="color:#a8893f;margin-top:30px">🚿 Tu Ducha Articular diaria · 7-10 minutos</h3>
+  <p>Esta es la rutina más importante de todo el programa. <strong>Imprescindible cada mañana, incluso en pijama, incluso 5 minutos.</strong> Cuenta en la racha de gamificación aunque ese día no entrenes nada más. Es la "vía amable" del programa.</p>
+
+  <div class="reto" style="background:#fff;border-left-color:#c9a96e">
+    <h4 style="color:#a8893f">Secuencia de la Ducha Articular</h4>
+    <p class="reto-xp">Tiempo total: 7-10 min · Cuenta como sesión válida</p>
+    <ol style="margin:8px 0 0;padding-left:24px;line-height:2;color:#4a4a6a">
+      <li><strong>CARs de hombro</strong> · 2 vueltas por dirección, cada brazo (1 min)</li>
+      <li><strong>CARs de cadera</strong> · 5 vueltas por dirección, cada pierna (1,5 min)</li>
+      <li><strong>Apertura torácica con rotación</strong> · 8 reps por lado (1,5 min)</li>
+      <li><strong>Respiración 360° con activación de transverso</strong> · 8 respiraciones (2 min)</li>
+      <li><strong>Bird-dog</strong> · 10 reps alternando (1 min)</li>
+      <li><strong>Dorsiflexión activa en pared</strong> · 10 reps por pie (1 min) ← CLAVE para tu tobillo</li>
+      <li><strong>Postura del Niño con apertura</strong> · 5 respiraciones (1 min)</li>
+    </ol>
+  </div>
+
+  <h3 style="color:#a8893f;margin-top:34px">📚 Biblioteca de ejercicios</h3>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar movilidad">🌀 Pilar 3 · Movilidad</span>
+        <h3>1 · CARs de hombro</h3>
+        <div class="sub">Rotaciones articulares controladas · cápsula glenohumeral</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Lubrica la cápsula articular, mantiene el rango activo del hombro, previene rigidez y compensaciones del trapecio superior. La administrativa que hay en ti las necesita cada mañana.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>De pie o sentada. Brazo derecho extendido al frente con el puño cerrado (el puño activa la cadena). Dibuja un círculo enorme y MUY LENTO: arriba → atrás → abajo → adelante. El resto del cuerpo absolutamente quieto — solo se mueve el hombro. Después al revés. Cambia de brazo.</div>
+    <div class="bloque"><strong>⚙️ Dosis</strong>2 vueltas por dirección, por brazo · Tempo lentísimo (30-45 s por vuelta)</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar movilidad">🌀 Pilar 3 · Movilidad</span>
+        <h3>2 · CARs de cadera</h3>
+        <div class="sub">Cápsula coxofemoral · clave para tu cintilla iliotibial</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · ESENCIAL para ti</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Las CARs de cadera son terapéuticas para la banda iliotibial — movilizan activamente el glúteo medio y los rotadores profundos. Hacerlas a diario va a empezar a desbloquear el patrón lateral en pocas semanas.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>De pie, una mano apoyada en la pared para estabilidad.</li>
+        <li>Levanta la rodilla derecha al pecho.</li>
+        <li>Abre la rodilla hacia el lateral (rotación externa de cadera) tan lejos como puedas SIN mover la pelvis.</li>
+        <li>Extiende la pierna hacia atrás (extensión).</li>
+        <li>Cierra la pierna hacia el centro.</li>
+        <li>Es un círculo enorme y lento con la rodilla. Después al revés.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Dosis</strong>5 vueltas por dirección, cada pierna. Dedica más tiempo y atención al lado IZQUIERDO.</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar movilidad">🌀 Pilar 3 · Movilidad</span>
+        <h3>3 · Apertura torácica con rotación</h3>
+        <div class="sub">Movilidad dorsal · T-Spine Rotation</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>La columna torácica (zona dorsal media) es donde más rigidez acumulamos por la postura sentada. Devolverle movilidad descomprime la lumbar, libera los hombros y mejora la profundidad respiratoria — clave en tu protocolo de pranayama.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>A cuatro patas. Mano izquierda detrás de la nuca, codo izquierdo apuntando al suelo.</li>
+        <li>Inhala mientras rotas el codo izquierdo hacia el techo, abriendo el pecho y siguiendo el codo con la mirada.</li>
+        <li>Exhala llevando el codo izquierdo hacia el brazo derecho de apoyo (cruza por debajo).</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Dosis</strong>8 reps por lado · Tempo lento, respiración guía cada repetición</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar movilidad">🌀 Pilar 3 · Movilidad</span>
+        <h3>4 · Respiración 360° con activación del transverso</h3>
+        <div class="sub">CORE profundo · la base de todo</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · LA BASE</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Aprende a respirar expandiendo las costillas en TODAS direcciones (frente, lados, espalda baja) en lugar de subir el pecho. Esta respiración activa el diafragma correctamente y el transverso del abdomen — tu "cinturón natural". Es la base de toda la estabilización lumbar.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Sentada o tumbada. Manos en los costados, justo debajo de las costillas laterales.</li>
+        <li>Inhala 4 s expandiendo las costillas EN 360°: frente, laterales contra tus manos, espalda baja contra el suelo o silla.</li>
+        <li>Exhala 6 s "tirando" suavemente el ombligo hacia atrás, como si fueras a ponerte un pantalón apretado.</li>
+        <li>En la exhalación sentirás cómo el transverso se activa — es la cinta interna que estabiliza tu columna.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Dosis</strong>8-10 respiraciones · 2-3 veces al día (puedes hacerlo en el coche parada, en el sofá, antes de dormir)</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar movilidad">🌀 Pilar 3 · Movilidad</span>
+        <h3>5 · Bird-Dog (Pájaro-Perro)</h3>
+        <div class="sub">CORE profundo + glúteo medio · estabilizadores</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · CLAVE para tu glúteo medio</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Trabaja simultáneamente multífidos (los pequeños músculos que conectan vértebra a vértebra y estabilizan la columna fina), glúteo medio y transverso. Es de los pocos ejercicios donde el glúteo medio trabaja como estabilizador, no como motor — exactamente como tiene que funcionar en la vida real para evitar la sobrecarga de tu cintilla.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>A cuatro patas, columna neutra. Imagina un vaso de agua en tu espalda baja — no se puede caer.</li>
+        <li>Extiende el brazo DERECHO hacia delante y la pierna IZQUIERDA hacia atrás simultáneamente.</li>
+        <li>Cadera y hombros nivelados. NO levantes la pierna más alta que la cadera.</li>
+        <li>Aguanta 2-3 s con todo activado. Vuelve al centro.</li>
+        <li>Cambia: brazo izquierdo + pierna derecha.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 10 reps alternando · Tempo 2-3-2 · Descanso 60 s</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar movilidad">🌀 Pilar 3 · Movilidad</span>
+        <h3>6 · Dead Bug (Bicho Muerto)</h3>
+        <div class="sub">Control motor · disociación de extremidades</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Enseña al CORE profundo a estabilizar la columna mientras las extremidades se mueven — exactamente lo que necesitas para caminar, correr, levantar cosas. Para una persona con tu nivel, el dead bug es donde puedes "afinar" la conexión transverso-respiración.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Tumbada boca arriba. Rodillas a 90° en el aire, brazos extendidos hacia el techo.</li>
+        <li>Lumbar PEGADA al suelo (sin arquearla) durante todo el ejercicio.</li>
+        <li>Exhala lentamente bajando el brazo derecho atrás (hacia el suelo) Y la pierna izquierda extendida hacia delante (sin tocar el suelo).</li>
+        <li>Inhala volviendo al centro. Cambia de diagonal.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo · Descanso</strong>3 × 8 reps alternando · Tempo 3-1-2 · Descanso 60 s</div>
+    <div class="bloque"><strong>⚠️ Vigila</strong>Si tu lumbar se despega del suelo, has bajado demasiado. Vuelve antes — la calidad por encima de la amplitud.</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar movilidad">🌀 Pilar 3 · Movilidad</span>
+        <h3>7 · Liberación miofascial con foam roller · Cadena Lateral</h3>
+        <div class="sub">PROTOCOLO ESPECÍFICO para tu cintilla iliotibial</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · 3 veces por semana</span></div>
+    </div>
+    <div class="tip">
+      <strong>Nota clínica importante:</strong> la cintilla iliotibial en sí no se "estira" (es tejido fibroso casi inelástico). Lo que liberamos es el tejido CIRCUNDANTE: tensor de la fascia lata, glúteo medio, vasto lateral del cuádriceps, peroneos. Eso reduce la tensión sobre la cintilla.
+    </div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo (4 puntos, 3 a la semana)</strong>
+      <ol>
+        <li><strong>TFL (tensor de la fascia lata)</strong>: tumbada de lado izquierdo, rodillo bajo la cresta ilíaca (justo bajo el hueso de la cadera). Pequeños movimientos lentos. 60-90 s.</li>
+        <li><strong>Glúteo medio izquierdo</strong>: sentada de lado sobre el rodillo, tobillo del lado a liberar cruzado sobre la rodilla del otro. Pequeños movimientos circulares. 60-90 s.</li>
+        <li><strong>Vasto lateral izquierdo (cara externa del cuádriceps)</strong>: tumbada de lado, rodillo bajo el lateral del muslo. Rueda LENTO desde la cadera hacia justo encima de la rodilla. NO ruedes sobre la cintilla iliotibial directamente — es contraproducente. 60-90 s.</li>
+        <li><strong>Peroneos (lateral pantorrilla)</strong>: sentada, rodillo bajo la cara externa de la pantorrilla izquierda. Pequeños movimientos. 60-90 s.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Dosis</strong>3 sesiones por semana de 5-7 min, idealmente <strong>después</strong> de entrenar o por la noche</div>
+    <div class="bloque"><strong>⚠️ Importante</strong>Respira lento durante toda la liberación. Si encuentras un punto muy doloroso, MANTÉN sobre él respirando profundo 30-45 s — no huyas. Eso es exactamente donde el tejido necesita liberarse.</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar movilidad">🌀 Pilar 3 · Movilidad</span>
+        <h3>8 · Dorsiflexión activa en pared</h3>
+        <div class="sub">Movilidad de tobillo · clave post-esguince</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · trabajar AMBOS lados</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Tu esguince de tobillo de hace dos años casi seguro ha dejado <strong>limitación de dorsiflexión</strong> (la capacidad de llevar la rodilla por delante del tobillo manteniendo el talón en el suelo). Si el tobillo no dorsiflexiona bien, el cuerpo compensa subiendo por la cadena lateral — y vuelves a cargar la cintilla. Recuperar este rango es estratégico.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>De pie frente a una pared. Pie izquierdo adelantado, punta a unos 10 cm de la pared.</li>
+        <li>Mantén el talón izquierdo en el suelo. Lleva la rodilla izquierda hacia la pared.</li>
+        <li>Si toca sin esfuerzo, aleja un cm más el pie. El objetivo es encontrar la distancia donde "casi" toca con esfuerzo.</li>
+        <li>Vuelve. Repite. Sentirás estiramiento en la pantorrilla.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Tempo</strong>3 × 10 reps por pie · Tempo lento</div>
+    <div class="bloque"><strong>⚠️ Comparar lados</strong>Es muy probable que el tobillo IZQUIERDO tenga menos rango que el derecho. Trabájalos los dos pero dedica más tiempo y atención al izquierdo. En 4-6 semanas deberían igualarse.</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar movilidad">🌀 Pilar 3 · Movilidad</span>
+        <h3>9 · 90/90 estiramiento dinámico</h3>
+        <div class="sub">Rotadores de cadera · "limpiaparabrisas"</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Movilidad de los rotadores internos y externos de cadera de forma activa. Excelente complemento a las CARs de cadera. Especialmente útil para la cadera izquierda en tu caso.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Sentada en el suelo. Pierna derecha delante doblada a 90° (rotación externa, planta apuntando a la izquierda).</li>
+        <li>Pierna izquierda detrás doblada a 90° (rotación interna, planta apuntando a la derecha).</li>
+        <li>Tronco erguido. Mano derecha apoyada en el suelo a tu derecha si necesitas equilibrio.</li>
+        <li>Alterna rotando AMBAS piernas como un limpiaparabrisas — invierte el patrón. Las plantas siempre en el suelo o muy cerca.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Dosis</strong>8-10 reps alternando · Tempo lento</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar movilidad">🌀 Pilar 3 · Movilidad</span>
+        <h3>10 · Postura del Niño con apertura</h3>
+        <div class="sub">Cierre · descompresión global</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Cierre suave de cualquier rutina. Abre cadera, descomprime lumbar, abre hombros y activa el parasimpático. Tu yoga ya te lo conoce — aquí lo usamos como punto final de la ducha articular.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>Rodillas abiertas más anchas que tu esterilla. Glúteos hacia los talones. Brazos extendidos al frente, palmas en el suelo. Frente apoyada (o sobre bloque si no llega). Respira profundo.</div>
+    <div class="bloque"><strong>⚙️ Dosis</strong>5-10 respiraciones · al final de cada ducha articular</div>
+  </article>
+</div>
+</section>
+
+<!-- ============ 9. PILAR 4 — CALISTENIA Y MOVIMIENTO NATURAL ============ -->
+<section id="pilar-calistenia" class="sec-light" style="border-top:4px solid #2c3e50">
+<div class="wrap">
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+    <div style="font-size:2.4rem">🤸</div>
+    <div>
+      <div style="color:#2c3e50;font-size:0.78rem;letter-spacing:3px;text-transform:uppercase;font-weight:600">Pilar 4</div>
+      <h2 style="margin:0">Calistenia y Movimiento Natural</h2>
+    </div>
+  </div>
+  <p class="sec-sub">El vocabulario primario del cuerpo: gatear, transitar, equilibrarte, colgarte. Probablemente el pilar que más vas a disfrutar.</p>
+
+  <div class="tip">
+    <strong>¿Qué es la calistenia y qué es el movimiento natural?</strong><br>
+    <strong>Calistenia</strong> es el entrenamiento de fuerza usando el propio peso corporal (flexiones, dominadas, fondos, planchas). Se progresa por dificultad técnica, no por kilos.<br>
+    <strong>Movimiento natural</strong> (estilo MovNat, desarrollado por Erwan Le Corre) es la vuelta a los gestos básicos de la especie: cuadrupedia, gateos, transiciones suelo-pie, locomociones animales (oso, cangrejo, gato). Es el "vocabulario" que nuestro cuerpo usó durante cien mil años antes de inventar las sillas.<br>
+    <strong>En tu caso, vamos a trabajar Nivel 3 con incursiones al 4.</strong> Tu cuestionario dice que puedes hacer flexión completa, te cuelgas 20 s y tienes equilibrio 9/10 — eso es base sobrada.
+  </div>
+
+  <h3 style="color:#2c3e50;margin-top:30px">📚 Biblioteca de ejercicios</h3>
+
+  <article class="ficha calistenia">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar calistenia">🤸 Pilar 4 · Calistenia</span>
+        <h3>1 · Get-Up Turco sin peso</h3>
+        <div class="sub">Transición suelo-pie · el ejercicio más completo que existe</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Es probablemente el ejercicio más completo de la calistenia. Trabaja hombro entero, CORE en todos sus planos, glúteos, propiocepción, coordinación y control motor. Es un "diagnóstico vivo" del cuerpo: cualquier punto débil aparece haciéndolo.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo (7 fases · lentamente)</strong>
+      <ol>
+        <li>Tumbada boca arriba. Brazo derecho extendido al techo (como sosteniendo una taza imaginaria). Pierna derecha doblada, pie en el suelo. Pierna izquierda extendida en diagonal.</li>
+        <li>Apoya en el codo izquierdo (mantén el brazo derecho arriba todo el tiempo).</li>
+        <li>Apoya en la mano izquierda extendida.</li>
+        <li>Eleva la cadera (puente de glúteo con un solo apoyo).</li>
+        <li>Barre la pierna izquierda hacia atrás hasta posición semi-arrodillada.</li>
+        <li>Sube a posición de zancada arrodillada.</li>
+        <li>Eleva a posición de pie completa.</li>
+        <li>Y ahora desciende invirtiendo el orden hasta volver tumbada. Cambia de lado.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Descanso</strong>3 series × 2 reps por lado · Tempo lentísimo (cada Get-Up completo dura 60-90 s) · Descanso 90 s</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Cuando dominas el Get-Up sin peso, añade una mancuerna ligera (1-2 kg) en la mano del brazo extendido.</div>
+  </article>
+
+  <article class="ficha calistenia">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar calistenia">🤸 Pilar 4 · Calistenia</span>
+        <h3>2 · Marcha del Oso (Bear Crawl)</h3>
+        <div class="sub">Cuadrupedia activa · coordinación contralateral</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Hombros, CORE en estabilización constante, glúteos y coordinación cruzada. Para una persona con tu tendencia a la rigidez por estudio prolongado, es un "reset" cerebral además de físico.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Posición de "mesa": cuadrupedia con rodillas a 1-2 cm del suelo (sin tocarlo).</li>
+        <li>Espalda neutra — ni hundida ni encorvada. Imagínate un vaso de agua entre los omóplatos.</li>
+        <li>Avanza moviendo MANO DERECHA + RODILLA IZQUIERDA simultáneamente (patrón contralateral).</li>
+        <li>Después MANO IZQUIERDA + RODILLA DERECHA. Mantén las caderas estables (sin oscilar).</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Descanso</strong>3 × 20-30 pasos (10-15 por lado) · Descanso 60-90 s</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Hacia atrás (más exigente para CORE), después en línea diagonal, después en zigzag.</div>
+  </article>
+
+  <article class="ficha calistenia">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar calistenia">🤸 Pilar 4 · Calistenia</span>
+        <h3>3 · Marcha del Cangrejo (Crab Walk)</h3>
+        <div class="sub">Cuadrupedia invertida · cadena posterior + tríceps</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Tríceps, hombros (rotadores externos), glúteos y CORE posterior. Complementa al oso porque trabaja la cadena contraria — antagónica.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Sentada con manos detrás (dedos apuntando a los pies), pies apoyados, rodillas dobladas.</li>
+        <li>Eleva las caderas formando "mesa invertida" — el cuerpo paralelo al suelo, glúteos arriba.</li>
+        <li>Avanza moviendo alternando mano y pie contralaterales. Mantén las caderas elevadas todo el tiempo.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Descanso</strong>3 × 20 pasos · Descanso 60-90 s</div>
+  </article>
+
+  <article class="ficha calistenia">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar calistenia">🤸 Pilar 4 · Calistenia</span>
+        <h3>4 · Gateo cruzado</h3>
+        <div class="sub">Cuadrupedia clásica · activación interhemisférica</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · ESPECIALMENTE útil antes de estudiar</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>El patrón cruzado (mano derecha + rodilla izquierda) es el mismo patrón motor primario que aprendimos al gatear de bebés. Activa la conexión entre hemisferios cerebrales (cuerpo calloso). Hay literatura que muestra mejor rendimiento cognitivo tras gateos cruzados — útil ANTES de sentarte a estudiar.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>Cuadrupedia clásica (rodillas en el suelo). Avanza moviendo mano derecha y rodilla izquierda simultáneamente, después la otra diagonal. La diferencia con el oso es que aquí las rodillas SÍ tocan el suelo — es más suave y permite ir más despacio para sentir el patrón.</div>
+    <div class="bloque"><strong>⚙️ Dosis</strong>3 × 20 pasos · Descanso 60 s · O 2 minutos como herramienta pre-estudio</div>
+  </article>
+
+  <article class="ficha calistenia">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar calistenia">🤸 Pilar 4 · Calistenia</span>
+        <h3>5 · Equilibrio monopodal con ojos cerrados</h3>
+        <div class="sub">Propiocepción pura · sin input visual</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · tu equilibrio es 9/10</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve en tu caso</strong>Con ojos abiertos ya tienes 9/10 — los ojos cerrados eliminan el 80% del input que usa tu cerebro para equilibrarse, dejando solo la <strong>propiocepción</strong> (el sentido interno que te dice dónde está tu cuerpo en el espacio sin necesidad de mirarlo). Es el reto siguiente. Trabaja tobillos, glúteo medio (¡otra vez clave!), CORE y reactividad neuromuscular.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>De pie cerca de una pared (por seguridad). Brazos relajados.</li>
+        <li>Levanta el pie izquierdo del suelo (rodilla doblada, sin apoyar en la otra pierna).</li>
+        <li>Cierra los ojos. Respira tranquila.</li>
+        <li>Aguanta lo que puedas sin caer ni tocar la pared.</li>
+        <li>Cambia de pie.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Descanso</strong>3 × 20-30 s por pie · Descanso 30 s</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Cuando alcances 45+ s con ojos cerrados en ambos pies, prueba sobre una superficie inestable (un cojín firme o una toalla doblada).</div>
+    <div class="bloque"><strong>📝 Comparación de lados</strong>El pie izquierdo (post-esguince) seguramente da menos tiempo que el derecho. Cuanto se igualen, sabrás que el tobillo ha cerrado por completo.</div>
+  </article>
+
+  <article class="ficha calistenia">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar calistenia">🤸 Pilar 4 · Calistenia</span>
+        <h3>6 · Sit-to-Stand sin manos</h3>
+        <div class="sub">Test funcional + ejercicio · predictor de longevidad</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Este es un <strong>test funcional clásico</strong> que se correlaciona con mortalidad por todas las causas en estudios poblacionales. Hacerlo bien = vivir más y mejor. Trabaja todo el cuerpo en un patrón vital: levantarse del suelo.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Sentada en el suelo (piernas cruzadas, en mariposa, como prefieras).</li>
+        <li>Levántate hasta de pie SIN usar las manos para apoyarte.</li>
+        <li>Vuelve a sentarte en el suelo SIN usar las manos.</li>
+        <li>Cada vez que apoyas mano, rodilla o antebrazo, es 1 "penalización".</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps</strong>3-5 reps · Tempo libre · Descanso 60 s</div>
+    <div class="bloque"><strong>📈 Tu objetivo</strong>Llegar a fin de programa con 0 penalizaciones en los 5 intentos consecutivos. En tu cuestionario marcaste "bajar al suelo y levantarme sin ayuda" — esto lo refina al máximo nivel.</div>
+  </article>
+
+  <article class="ficha calistenia">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar calistenia">🤸 Pilar 4 · Calistenia</span>
+        <h3>7 · Dead Hang (Colgado pasivo)</h3>
+        <div class="sub">Suspensión · descompresión vertebral</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem v">🟢 Segura · ya marcaste 20 s</span></div>
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Trabaja agarre (predictor de longevidad y salud cardiovascular en mujeres), hombros, dorsales activados, descomprime la columna por la tracción gravitacional. Para alguien sedentaria 8 horas al día, los 30 segundos de colgada son terapéuticos.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Si tienes barra fija o un marco de puerta resistente con barra de dominadas (recomiendo comprar una de las que se atornillan en el marco, 15-25€).</li>
+        <li>Cuélgate con manos anchura de hombros, palmas hacia delante.</li>
+        <li>NO te dejes "muerta" — mantén los hombros ACTIVOS (ligera retracción escapular, sensación de "alejar los hombros de las orejas").</li>
+        <li>Aguanta. Respira. Suelta antes de fallar la técnica.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Descanso</strong>3 × 30-45 s · Descanso 90 s</div>
+    <div class="bloque"><strong>📈 Progresión</strong>Aumentar tiempo hasta llegar a 60 s. Después: Dead Hang con elevación de rodillas al pecho (8 reps por serie).</div>
+  </article>
+
+  <article class="ficha calistenia">
+    <div class="ficha-head">
+      <div>
+        <span class="badge-pilar calistenia">🤸 Pilar 4 · Calistenia</span>
+        <h3>8 · Beast → Crab (Animal Flow básico)</h3>
+        <div class="sub">Flujo · "regalo motor" para fase 3</div>
+      </div>
+      <div class="badges-row"><span class="badge-sem a">🟡 Solo a partir de fase 3 (semanas 5-6)</span></div>
+    </div>
+    <div class="tip">
+      <strong>¿Qué es Animal Flow?</strong><br>
+      Es un sistema de movimiento creado por Mike Fitch que conecta patrones de animales (oso, cangrejo, escorpión) en flujos continuos. Trabaja fuerza, movilidad y coordinación a la vez. Para quien tiene tu base, es uno de los entrenamientos más divertidos y completos que existen.
+    </div>
+    <div class="bloque"><strong>🎯 Para qué sirve</strong>Transiciones fluidas en el plano transversal (rotacional). Trabaja CORE rotacional, hombros en cadena cerrada, coordinación global. Es probablemente el "regalo motor" que más te va a sorprender.</div>
+    <div class="bloque"><strong>📋 Cómo ejecutarlo</strong>
+      <ol>
+        <li>Parte de la postura "Beast" (cuadrupedia con rodillas elevadas, posición de oso estática).</li>
+        <li>Carga el peso en la mano izquierda. La mano derecha SE LEVANTA del suelo y sube hacia el techo mientras el cuerpo gira hacia la derecha.</li>
+        <li>Aterrizas en posición "Crab" (cangrejo) con el lado derecho.</li>
+        <li>Invierte: la mano izquierda sube al techo, el cuerpo gira y aterrizas en Beast de nuevo.</li>
+        <li>Hazlo para los dos lados. Es como un "limpiaparabrisas" en el suelo.</li>
+      </ol>
+    </div>
+    <div class="bloque"><strong>⚙️ Series · Reps · Descanso</strong>3 × 6 transiciones por lado · Tempo controlado · Descanso 60-90 s</div>
+    <div class="bloque"><strong>⚠️ Cuándo introducirlo</strong>Solo en fase 3 del programa (semanas 5-6), cuando ya dominas Beast estático y Crab estático sin esfuerzo.</div>
+  </article>
+
+  <div class="tip" style="background:#e8eff5;border-left-color:#2c3e50;color:#2c3e50">
+    <strong>Rutina sugerida del Pilar 4 (25-30 min)</strong><br>
+    1. Calentamiento: gateo cruzado 2 min<br>
+    2. Get-Up turco · 3 × 2 reps por lado<br>
+    3. Bear Crawl · 3 × 20 pasos<br>
+    4. Crab Walk · 3 × 15 pasos<br>
+    5. Equilibrio monopodal ojos cerrados · 3 × 20 s por pie<br>
+    6. Dead Hang · 3 × 30 s (si tienes barra)<br>
+    7. Sit-to-Stand sin manos · 5 reps (test de cierre)
+  </div>
+</div>
+</section>
+
+<!-- ============ 10. SISTEMA DE GAMIFICACIÓN ============ -->
+<section id="gamificacion" style="background:#1a1f2e;color:#faf7f2;padding:50px 20px">
+<div class="wrap">
+  <h2 style="font-family:Georgia,serif;color:#c9a96e;font-size:1.85rem;text-align:center;margin-bottom:6px">🎮 Tu Progreso</h2>
+  <p style="text-align:center;color:#888899;font-style:italic;margin-bottom:34px">El mapa de tu transformación. Aquí se hace visible lo invisible.</p>
+
+  <!-- BLOQUE 1: NIVEL + XP -->
+  <div style="background:#0d1117;border:1px solid #2c3e50;border-radius:12px;padding:22px;margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+      <div>
+        <div style="color:#888899;font-size:0.78rem;text-transform:uppercase;letter-spacing:2px">Nivel actual</div>
+        <div id="km-level-name" style="font-family:Georgia,serif;color:#c9a96e;font-size:1.55rem;margin-top:4px">Iniciada</div>
+      </div>
+      <div style="text-align:right">
+        <div style="color:#888899;font-size:0.78rem">XP total</div>
+        <div id="km-xp-total" style="color:#faf7f2;font-size:2rem;font-weight:600">0</div>
+      </div>
+    </div>
+    <div style="margin-top:18px;background:#2c3e50;border-radius:10px;height:12px;overflow:hidden">
+      <div id="km-xp-bar" style="background:#c9a96e;height:100%;width:0%;transition:width .6s"></div>
+    </div>
+    <div id="km-xp-next" style="color:#888899;font-size:0.85rem;margin-top:8px">500 XP para Aprendiz</div>
+  </div>
+
+  <!-- BLOQUE 2: RACHA Y SESIONES -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:18px">
+    <div style="background:#0d1117;border:1px solid #2c3e50;border-radius:12px;padding:18px;text-align:center">
+      <div style="font-size:2.2rem">🔥</div>
+      <div id="km-streak" style="font-size:1.9rem;color:#c1704a;font-weight:600">0</div>
+      <div style="color:#888899;font-size:0.72rem;text-transform:uppercase;letter-spacing:1px">Días seguidos</div>
+    </div>
+    <div style="background:#0d1117;border:1px solid #2c3e50;border-radius:12px;padding:18px;text-align:center">
+      <div style="font-size:2.2rem">📅</div>
+      <div id="km-total-sessions" style="font-size:1.9rem;color:#7a9e7e;font-weight:600">0</div>
+      <div style="color:#888899;font-size:0.72rem;text-transform:uppercase;letter-spacing:1px">Sesiones totales</div>
+    </div>
+    <div style="background:#0d1117;border:1px solid #2c3e50;border-radius:12px;padding:18px;text-align:center">
+      <div style="font-size:2.2rem">🏅</div>
+      <div id="km-badges-count" style="font-size:1.9rem;color:#c9a96e;font-weight:600">0</div>
+      <div style="color:#888899;font-size:0.72rem;text-transform:uppercase;letter-spacing:1px">Medallas</div>
+    </div>
+  </div>
+
+  <!-- BLOQUE 3: REGISTRAR SESIÓN -->
+  <div style="background:#0d1117;border:1px solid #2c3e50;border-radius:12px;padding:22px;margin-bottom:18px">
+    <h3 style="color:#c9a96e;font-family:Georgia,serif;margin-top:0;font-size:1.15rem">Registrar sesión de hoy</h3>
+    <p style="color:#888899;font-size:0.85rem;margin:6px 0 16px">Pulsa el botón al terminar cada sesión. Tu progreso queda guardado en este navegador.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px">
+      <button onclick="kmAddXP(15,'yoga')" style="background:#7a9e7e;color:#fff;border:0;padding:12px;border-radius:9px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3">🧘 Yoga 15min<br><small style="font-weight:400;opacity:0.85">+15 XP</small></button>
+      <button onclick="kmAddXP(30,'yoga')" style="background:#7a9e7e;color:#fff;border:0;padding:12px;border-radius:9px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3">🧘 Yoga 30min<br><small style="font-weight:400;opacity:0.85">+30 XP</small></button>
+      <button onclick="kmAddXP(50,'yoga')" style="background:#7a9e7e;color:#fff;border:0;padding:12px;border-radius:9px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3">🧘 Yoga 45min<br><small style="font-weight:400;opacity:0.85">+50 XP</small></button>
+      <button onclick="kmAddXP(60,'fuerza')" style="background:#c1704a;color:#fff;border:0;padding:12px;border-radius:9px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3">💪 Fuerza<br><small style="font-weight:400;opacity:0.85">+60 XP</small></button>
+      <button onclick="kmAddXP(40,'movilidad')" style="background:#c9a96e;color:#fff;border:0;padding:12px;border-radius:9px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3">🌀 Movilidad<br><small style="font-weight:400;opacity:0.85">+40 XP</small></button>
+      <button onclick="kmAddXP(50,'calistenia')" style="background:#2c3e50;color:#fff;border:1px solid #c9a96e;padding:12px;border-radius:9px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3">🤸 Calistenia<br><small style="font-weight:400;opacity:0.85">+50 XP</small></button>
+      <button onclick="kmAddXP(10,'ducha')" style="background:#888899;color:#fff;border:0;padding:12px;border-radius:9px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3">🚿 Ducha articular<br><small style="font-weight:400;opacity:0.85">+10 XP</small></button>
+      <button onclick="kmAddXP(30,'nidra')" style="background:#1a1f2e;color:#c9a96e;border:1px solid #c9a96e;padding:12px;border-radius:9px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3">🌙 Yoga Nidra<br><small style="font-weight:400;opacity:0.85">+30 XP</small></button>
+    </div>
+    <button onclick="kmReset()" style="background:transparent;color:#888899;border:1px solid #2c3e50;padding:8px 14px;border-radius:8px;font-size:0.78rem;cursor:pointer;margin-top:16px;font-family:inherit">↺ Reiniciar contador</button>
+  </div>
+
+  <!-- BLOQUE 4: MEDALLAS -->
+  <div style="background:#0d1117;border:1px solid #2c3e50;border-radius:12px;padding:22px;margin-bottom:18px">
+    <h3 style="color:#c9a96e;font-family:Georgia,serif;margin-top:0;font-size:1.15rem">Tus medallas</h3>
+    <p style="color:#888899;font-size:0.85rem;margin:6px 0 14px">Se desbloquean automáticamente según tu progreso. Las grises aún no las has ganado.</p>
+    <div id="km-badges-list" style="display:flex;flex-wrap:wrap;gap:9px"></div>
+  </div>
+
+  <!-- BLOQUE 5: RUEDA RADAR -->
+  <div style="background:#0d1117;border:1px solid #2c3e50;border-radius:12px;padding:22px">
+    <h3 style="color:#c9a96e;font-family:Georgia,serif;margin-top:0;font-size:1.15rem">Rueda de competencias</h3>
+    <p style="color:#888899;font-size:0.85rem;margin-bottom:16px">Autoevalúa cada dimensión del 1 al 10 cada semana. Verás tu evolución frente a tu punto de partida (línea discontinua).</p>
+    <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:18px">
+      <div data-dim="fuerza"><label style="display:flex;justify-content:space-between;color:#faf7f2;font-size:0.88rem">💪 Fuerza <span class="km-dim-val" style="color:#c9a96e">5</span></label><input type="range" min="1" max="10" value="5" oninput="kmUpdateDim(this,'fuerza')" style="width:100%;accent-color:#c1704a"></div>
+      <div data-dim="movilidad"><label style="display:flex;justify-content:space-between;color:#faf7f2;font-size:0.88rem">🌀 Movilidad <span class="km-dim-val" style="color:#c9a96e">5</span></label><input type="range" min="1" max="10" value="5" oninput="kmUpdateDim(this,'movilidad')" style="width:100%;accent-color:#c9a96e"></div>
+      <div data-dim="equilibrio"><label style="display:flex;justify-content:space-between;color:#faf7f2;font-size:0.88rem">⚖️ Equilibrio <span class="km-dim-val" style="color:#c9a96e">5</span></label><input type="range" min="1" max="10" value="5" oninput="kmUpdateDim(this,'equilibrio')" style="width:100%;accent-color:#2c3e50"></div>
+      <div data-dim="energia"><label style="display:flex;justify-content:space-between;color:#faf7f2;font-size:0.88rem">⚡ Energía <span class="km-dim-val" style="color:#c9a96e">5</span></label><input type="range" min="1" max="10" value="5" oninput="kmUpdateDim(this,'energia')" style="width:100%;accent-color:#c9a96e"></div>
+      <div data-dim="calma"><label style="display:flex;justify-content:space-between;color:#faf7f2;font-size:0.88rem">🌊 Calma · Sistema Nervioso <span class="km-dim-val" style="color:#c9a96e">5</span></label><input type="range" min="1" max="10" value="5" oninput="kmUpdateDim(this,'calma')" style="width:100%;accent-color:#7a9e7e"></div>
+      <div data-dim="conexion"><label style="display:flex;justify-content:space-between;color:#faf7f2;font-size:0.88rem">💗 Conexión con el cuerpo <span class="km-dim-val" style="color:#c9a96e">5</span></label><input type="range" min="1" max="10" value="5" oninput="kmUpdateDim(this,'conexion')" style="width:100%;accent-color:#c1704a"></div>
+    </div>
+    <button onclick="kmSaveWeek()" style="background:#c9a96e;color:#0d1117;border:0;padding:12px 24px;border-radius:8px;font-weight:600;cursor:pointer;width:100%;font-family:inherit;font-size:0.95rem">Guardar evaluación de esta semana</button>
+    <canvas id="km-radar" width="400" height="400" style="width:100%;max-width:400px;display:block;margin:22px auto 0"></canvas>
+  </div>
+
+  <!-- RETOS POR SEMANA -->
+  <h3 style="color:#c9a96e;font-family:Georgia,serif;margin-top:40px;text-align:center;font-size:1.3rem">📜 Tus retos semanales</h3>
+  <p style="text-align:center;color:#888899;font-size:0.9rem;margin-bottom:24px;font-style:italic">Marca cada casilla cuando la completes. Cada reto cerrado vale 50 XP extra.</p>
+
+  <div class="reto" style="background:#0d1117;color:#faf7f2;border-left-color:#7a9e7e">
+    <h4 style="color:#c9a96e">Semana 1 · "Llegar a la esterilla"</h4>
+    <p class="reto-xp" style="color:#7a9e7e">+50 XP al completar · Fase 1: Adaptación</p>
+    <label style="color:#faf7f2"><input type="checkbox"> Hacer la ducha articular 5 mañanas</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Completar 1 sesión de Yoga (la tuya semanal cuenta)</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Completar 1 sesión de Fuerza Rutina A</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Anotar 3 días en el diario de práctica</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Beber 8 vasos de agua durante 5 días</label>
+  </div>
+
+  <div class="reto" style="background:#0d1117;color:#faf7f2;border-left-color:#7a9e7e">
+    <h4 style="color:#c9a96e">Semana 2 · "Construyendo el cimiento"</h4>
+    <p class="reto-xp" style="color:#7a9e7e">+50 XP al completar · Fase 1: Adaptación</p>
+    <label style="color:#faf7f2"><input type="checkbox"> Ducha articular 6 días</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Completar Rutina A Y Rutina B de fuerza</label>
+    <label style="color:#faf7f2"><input type="checkbox"> 1 sesión de Calistenia</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Practicar Nadi Shodhana 5 días</label>
+    <label style="color:#faf7f2"><input type="checkbox"> 1 sesión de Yoga Nidra</label>
+  </div>
+
+  <div class="reto" style="background:#0d1117;color:#faf7f2;border-left-color:#c1704a">
+    <h4 style="color:#c9a96e">Semana 3 · "Sentir el cambio"</h4>
+    <p class="reto-xp" style="color:#c1704a">+50 XP al completar · Fase 2: Consolidación</p>
+    <label style="color:#faf7f2"><input type="checkbox"> Subir 1 kg en mancuernas en algún ejercicio</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Notar y anotar 1 cambio físico positivo</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Hacer protocolo foam roller cintilla 3 veces</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Practicar hipopresivos 2 veces</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Dormir 7+ horas 4 noches</label>
+  </div>
+
+  <div class="reto" style="background:#0d1117;color:#faf7f2;border-left-color:#c1704a">
+    <h4 style="color:#c9a96e">Semana 4 · "Integración"</h4>
+    <p class="reto-xp" style="color:#c1704a">+50 XP al completar · Fase 2: Consolidación</p>
+    <label style="color:#faf7f2"><input type="checkbox"> Completar un día con los 4 pilares</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Aumentar resistencia de banda o añadir kg</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Mantener la sankalpa toda la semana</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Caminar al aire libre 3 veces (mínimo 30 min)</label>
+    <label style="color:#faf7f2"><input type="checkbox"> 1 día sin redes sociales (descanso mental)</label>
+  </div>
+
+  <div class="reto" style="background:#0d1117;color:#faf7f2;border-left-color:#c9a96e">
+    <h4 style="color:#c9a96e">Semana 5 · "Profundización"</h4>
+    <p class="reto-xp" style="color:#c9a96e">+50 XP al completar · Fase 3: Profundización</p>
+    <label style="color:#faf7f2"><input type="checkbox"> Subir un nivel en algún ejercicio (técnica o carga)</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Probar el flujo Beast → Crab (Animal Flow)</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Hacer una sesión SIN mirar este documento</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Equilibrio monopodal ojos cerrados 30 s ambos pies</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Compartir cómo te sientes con alguien cercano</label>
+  </div>
+
+  <div class="reto" style="background:#0d1117;color:#faf7f2;border-left-color:#c9a96e">
+    <h4 style="color:#c9a96e">Semana 6 · "Autonomía"</h4>
+    <p class="reto-xp" style="color:#c9a96e">+50 XP al completar · Fase 3: Profundización</p>
+    <label style="color:#faf7f2"><input type="checkbox"> Diseñar TÚ una sesión combinando tus ejercicios favoritos</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Ducha articular 7 días</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Cierre del diario de práctica con honestidad</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Identificar 3 hábitos del programa que vas a mantener</label>
+    <label style="color:#faf7f2"><input type="checkbox"> Celebrar el cierre contigo (lo que sea: una cena, un baño largo, una llamada)</label>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  const STORAGE_KEY='km_mariajose_v1';
+  const LEVELS=[
+    {name:'Iniciada',threshold:0},
+    {name:'Aprendiz',threshold:500},
+    {name:'Practicante',threshold:1500},
+    {name:'Maestra',threshold:3500}
+  ];
+  const BADGE_LIST=[
+    {id:'primera',name:'Primera vez',icon:'🌱',check:d=>d.totalSessions>=1},
+    {id:'semana',name:'Una semana entera',icon:'🔥',check:d=>d.streak>=7},
+    {id:'dos_sem',name:'Dos semanas',icon:'⚡',check:d=>d.streak>=14},
+    {id:'mes',name:'Mes vivido',icon:'🏔️',check:d=>d.streak>=30},
+    {id:'trimestre',name:'Trimestre transformador',icon:'🌟',check:d=>d.streak>=90},
+    {id:'sereno',name:'Serena',icon:'🌙',check:d=>(d.sessionsByType.nidra||0)>=5},
+    {id:'presencia',name:'Presencia',icon:'🪷',check:d=>(d.sessionsByType.yoga||0)>=21},
+    {id:'vagal',name:'Vagal',icon:'🌊',check:d=>d.totalSessions>=14},
+    {id:'fuerte',name:'Cuerpo capaz',icon:'💪',check:d=>(d.sessionsByType.fuerza||0)>=10},
+    {id:'ducha',name:'Ritual matinal',icon:'🚿',check:d=>(d.sessionsByType.ducha||0)>=14},
+    {id:'completo',name:'Día completo',icon:'🌀',check:d=>d.totalSessions>=30},
+    {id:'volver',name:'Volver tras una caída',icon:'🌅',check:d=>d.returnedAfterBreak===true}
+  ];
+  function load(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||defaultData()}catch(e){return defaultData()}}
+  function save(d){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(d))}catch(e){}}
+  function defaultData(){return{xp:0,streak:0,totalSessions:0,lastDate:null,sessionsByType:{},badges:[],weeklyAssessments:[],currentDim:{fuerza:5,movilidad:5,equilibrio:5,energia:5,calma:5,conexion:5},returnedAfterBreak:false}}
+  function todayStr(){return new Date().toISOString().slice(0,10)}
+  function daysBetween(a,b){if(!a||!b)return Infinity;const ms=new Date(b)-new Date(a);return Math.floor(ms/(1000*60*60*24))}
+  function getLevel(xp){let lvl=LEVELS[0];for(const l of LEVELS){if(xp>=l.threshold)lvl=l}return lvl}
+  function getNextLevel(xp){for(const l of LEVELS){if(l.threshold>xp)return l}return null}
+
+  window.kmAddXP=function(amount,type){
+    const d=load();const today=todayStr();const gap=daysBetween(d.lastDate,today);
+    if(d.lastDate!==today){
+      if(gap===1)d.streak+=1;
+      else if(gap>1){if(gap>=7)d.returnedAfterBreak=true;d.streak=1;}
+      else if(d.lastDate===null)d.streak=1;
+      d.lastDate=today;
+    }
+    d.xp+=amount;d.totalSessions+=1;
+    d.sessionsByType[type]=(d.sessionsByType[type]||0)+1;
+    if(d.streak===7)d.xp+=20;
+    if(d.streak===30)d.xp+=100;
+    if(d.streak===60)d.xp+=200;
+    if(d.streak===90)d.xp+=500;
+    for(const b of BADGE_LIST){if(!d.badges.includes(b.id)&&b.check(d))d.badges.push(b.id)}
+    save(d);render();flashMessage('+'+amount+' XP');
+  };
+  window.kmUpdateDim=function(input,dim){
+    const d=load();d.currentDim[dim]=parseInt(input.value);
+    input.parentElement.querySelector('.km-dim-val').textContent=input.value;
+    save(d);drawRadar();
+  };
+  window.kmSaveWeek=function(){
+    const d=load();d.weeklyAssessments.push({date:todayStr(),values:{...d.currentDim}});
+    save(d);drawRadar();flashMessage('Evaluación de la semana guardada 🌿');
+  };
+  // Modal custom de confirmación (funciona en sandbox/iframe donde confirm() está bloqueado)
+  window.kmConfirm=function(mensaje, callback){
+    const back=document.createElement('div');
+    back.style.cssText='position:fixed;inset:0;background:rgba(13,17,23,0.85);z-index:99998;display:flex;align-items:center;justify-content:center;padding:20px;font-family:-apple-system,sans-serif;animation:kmFadeIn .2s';
+    const box=document.createElement('div');
+    box.style.cssText='background:#1a1f2e;border:1px solid #c9a96e;border-radius:14px;padding:28px;max-width:420px;width:100%;color:#faf7f2;box-shadow:0 10px 40px rgba(0,0,0,0.5)';
+    box.innerHTML=
+      '<h3 style="font-family:Georgia,serif;color:#c9a96e;margin:0 0 12px;font-size:1.2rem">¿Estás segura?</h3>'+
+      '<p style="margin:0 0 22px;line-height:1.6;color:#d8d4c5;font-size:0.95rem">'+mensaje+'</p>'+
+      '<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">'+
+        '<button id="km-cancel" style="background:transparent;color:#888899;border:1px solid #2c3e50;padding:10px 18px;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:0.9rem">Cancelar</button>'+
+        '<button id="km-ok" style="background:#c1704a;color:#fff;border:0;padding:10px 18px;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:0.9rem">Sí, reiniciar</button>'+
+      '</div>';
+    back.appendChild(box);
+    document.body.appendChild(back);
+    document.getElementById('km-cancel').onclick=()=>back.remove();
+    document.getElementById('km-ok').onclick=()=>{back.remove();callback();};
+    back.onclick=(e)=>{if(e.target===back)back.remove();};
+  }
+
+  window.kmReset=function(){
+    window.kmConfirm('Vas a borrar XP, medallas, racha, evaluaciones del radar y casillas de retos. No se puede deshacer.', ()=>{
+      try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
+      try{localStorage.removeItem(RETOS_KEY)}catch(e){}
+      document.querySelectorAll('#gamificacion [data-dim] input[type=range]').forEach(r=>{
+        r.value=5;
+        const span=r.parentElement.querySelector('.km-dim-val');
+        if(span) span.textContent='5';
+      });
+      document.querySelectorAll('#gamificacion .reto input[type=checkbox]').forEach(c=>{
+        c.checked=false;
+      });
+      render();
+      flashMessage('Progreso reiniciado ↺');
+    });
+  };
+  function flashMessage(msg){
+    const el=document.createElement('div');
+    el.textContent=msg;
+    el.style.cssText='position:fixed;top:20px;right:20px;background:#c9a96e;color:#0d1117;padding:12px 20px;border-radius:8px;font-weight:600;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.3);font-family:-apple-system,sans-serif';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),2200);
+  }
+
+  // ========== PERSISTENCIA DE CHECKBOXES DE RETOS ==========
+  const RETOS_KEY='km_mariajose_retos_v1';
+  function loadRetos(){try{return JSON.parse(localStorage.getItem(RETOS_KEY))||{}}catch(e){return{}}}
+  function saveRetos(r){try{localStorage.setItem(RETOS_KEY,JSON.stringify(r))}catch(e){}}
+  function initRetos(){
+    const retos=loadRetos();
+    document.querySelectorAll('#gamificacion .reto input[type=checkbox]').forEach((cb,i)=>{
+      const id='reto_'+i;
+      cb.dataset.retoId=id;
+      if(retos[id])cb.checked=true;
+      cb.addEventListener('change',()=>{
+        const r=loadRetos();
+        if(cb.checked)r[id]=true;else delete r[id];
+        saveRetos(r);
+      });
+    });
+  }
+  function render(){
+    const d=load();const lvl=getLevel(d.xp);const next=getNextLevel(d.xp);
+    document.getElementById('km-level-name').textContent=lvl.name;
+    document.getElementById('km-xp-total').textContent=d.xp;
+    document.getElementById('km-streak').textContent=d.streak;
+    document.getElementById('km-total-sessions').textContent=d.totalSessions;
+    document.getElementById('km-badges-count').textContent=d.badges.length;
+    if(next){
+      const pct=((d.xp-lvl.threshold)/(next.threshold-lvl.threshold))*100;
+      document.getElementById('km-xp-bar').style.width=Math.min(100,pct)+'%';
+      document.getElementById('km-xp-next').textContent=(next.threshold-d.xp)+' XP para '+next.name;
+    } else {
+      document.getElementById('km-xp-bar').style.width='100%';
+      document.getElementById('km-xp-next').textContent='¡Nivel máximo alcanzado!';
+    }
+    const list=document.getElementById('km-badges-list');list.innerHTML='';
+    for(const b of BADGE_LIST){
+      const earned=d.badges.includes(b.id);
+      const div=document.createElement('div');
+      div.style.cssText='background:'+(earned?'#c9a96e':'#2c3e50')+';color:'+(earned?'#0d1117':'#888899')+';padding:9px 13px;border-radius:9px;font-size:0.82rem;display:flex;align-items:center;gap:7px;'+(earned?'':'opacity:0.55;');
+      div.innerHTML='<span style="font-size:1.3rem">'+b.icon+'</span> '+b.name;
+      list.appendChild(div);
+    }
+    drawRadar();
+  }
+  function drawRadar(){
+    const canvas=document.getElementById('km-radar');
+    if(!canvas)return;
+    const ctx=canvas.getContext('2d');
+    ctx.clearRect(0,0,400,400);
+    const cx=200,cy=200,r=130;
+    const dims=['fuerza','movilidad','equilibrio','energia','calma','conexion'];
+    const labels=['Fuerza','Movilidad','Equilibrio','Energía','Calma','Conexión'];
+    const angles=dims.map((_,i)=>(-Math.PI/2)+i*(Math.PI*2/6));
+    for(let g=2;g<=10;g+=2){
+      ctx.beginPath();
+      for(let i=0;i<6;i++){
+        const x=cx+Math.cos(angles[i])*r*(g/10);
+        const y=cy+Math.sin(angles[i])*r*(g/10);
+        if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+      }
+      ctx.closePath();ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.stroke();
+    }
+    for(let i=0;i<6;i++){
+      ctx.beginPath();ctx.moveTo(cx,cy);
+      ctx.lineTo(cx+Math.cos(angles[i])*r,cy+Math.sin(angles[i])*r);
+      ctx.strokeStyle='rgba(255,255,255,0.12)';ctx.stroke();
+    }
+    ctx.fillStyle='#c9a96e';ctx.font='12px sans-serif';ctx.textAlign='center';
+    for(let i=0;i<6;i++){
+      const x=cx+Math.cos(angles[i])*(r+22);
+      const y=cy+Math.sin(angles[i])*(r+22)+4;
+      ctx.fillText(labels[i],x,y);
+    }
+    const d=load();
+    if(d.weeklyAssessments.length>0){
+      const first=d.weeklyAssessments[0].values;
+      ctx.beginPath();
+      for(let i=0;i<6;i++){
+        const v=first[dims[i]]/10;
+        const x=cx+Math.cos(angles[i])*r*v;
+        const y=cy+Math.sin(angles[i])*r*v;
+        if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+      }
+      ctx.closePath();ctx.strokeStyle='#888899';ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);
+    }
+    ctx.beginPath();
+    for(let i=0;i<6;i++){
+      const v=d.currentDim[dims[i]]/10;
+      const x=cx+Math.cos(angles[i])*r*v;
+      const y=cy+Math.sin(angles[i])*r*v;
+      if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.fillStyle='rgba(201,169,110,0.28)';ctx.fill();
+    ctx.strokeStyle='#c9a96e';ctx.lineWidth=2;ctx.stroke();
+  }
+  document.addEventListener('DOMContentLoaded',()=>{render();initRetos();});
+  setTimeout(()=>{render();initRetos();},100);
+})();
+function irA(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+
+<!-- ============ 11. CALENDARIO SEMANAL POR FASES ============ -->
+<section id="calendario" class="sec-warm">
+<div class="wrap">
+  <h2>📅 Tu Calendario Semanal</h2>
+  <p class="sec-sub">3 fases de 2 semanas cada una. Solo 3 sesiones largas por semana (martes, jueves, sábado) — tus tardes preferidas — más la ducha articular diaria como ritual matinal.</p>
+
+  <div class="tip">
+    <strong>Reglas de oro de este calendario</strong><br>
+    • <strong>Ducha articular CADA mañana</strong>, aunque sean 5 min en pijama. Cuenta como sesión en la racha.<br>
+    • Nunca fuerza intensa dos días seguidos. Siempre yoga o movilidad entre medias.<br>
+    • Tu sesión semanal habitual de yoga (instructora) SÍ cuenta como sesión del Pilar 1 — la integramos.<br>
+    • Si un día no puedes, no te culpes: haz el <strong>Modo Express</strong> (Viperita Karani 5 min + ducha articular). Vale igual en la racha.
+  </div>
+
+  <h3 style="color:#2c3e50;margin-top:30px">🌱 FASE 1 · Adaptación · Semanas 1-2</h3>
+  <p>Tu cuerpo aprende los patrones nuevos. Intensidad baja, técnica máxima. RIR 3-4.</p>
+
+  <table class="cal-tabla">
+    <thead>
+      <tr>
+        <th>Día</th>
+        <th>Pilar protagonista</th>
+        <th>Sesión</th>
+        <th>Duración</th>
+        <th>RPE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="movilidad"><td><strong>Lunes</strong></td><td><span class="cal-pill" style="background:#c9a96e">🌀 Movilidad</span></td><td>Ducha articular completa (mañana) + foam roller cadena lateral (noche, 7 min)</td><td>17 min</td><td>2/10</td></tr>
+      <tr class="fuerza"><td><strong>Martes</strong></td><td><span class="cal-pill" style="background:#c1704a">💪 Fuerza A</span></td><td>Ducha articular + <strong>Rutina A</strong> completa (Press hombros · Sentadilla · Remo · Glute bridge · Pallof · Hipopresivos)</td><td>30 min</td><td>6/10</td></tr>
+      <tr class="movilidad"><td><strong>Miércoles</strong></td><td><span class="cal-pill" style="background:#c9a96e">🌀 Ducha</span></td><td>Solo ducha articular matinal. Descanso activo.</td><td>10 min</td><td>1/10</td></tr>
+      <tr class="yoga"><td><strong>Jueves</strong></td><td><span class="cal-pill" style="background:#7a9e7e">🧘 Yoga</span></td><td>Ducha articular + Sesión completa de yoga (tu sesión semanal habitual integrada con la sankalpa nueva)</td><td>40-60 min</td><td>4/10</td></tr>
+      <tr class="movilidad"><td><strong>Viernes</strong></td><td><span class="cal-pill" style="background:#c9a96e">🌀 Movilidad</span></td><td>Ducha articular + foam roller cadena lateral (noche)</td><td>17 min</td><td>2/10</td></tr>
+      <tr class="fuerza"><td><strong>Sábado</strong></td><td><span class="cal-pill" style="background:#c1704a">💪 Fuerza B</span></td><td>Ducha articular + <strong>Rutina B</strong> completa (Press pecho · Peso muerto · Jalón · Zancada · Abducción · Plancha lateral)</td><td>30 min</td><td>6/10</td></tr>
+      <tr class="descanso"><td><strong>Domingo</strong></td><td><span class="cal-pill" style="background:#1a1f2e">🌙 Yoga Nidra</span></td><td>Ducha articular + Yoga Nidra guiado (20-30 min). Cierre semanal.</td><td>30 min</td><td>1/10</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:#2c3e50;margin-top:36px">⚡ FASE 2 · Consolidación · Semanas 3-4</h3>
+  <p>Subimos carga. La técnica ya está. Introducimos calistenia. RIR 2-3.</p>
+
+  <table class="cal-tabla">
+    <thead>
+      <tr>
+        <th>Día</th>
+        <th>Pilar protagonista</th>
+        <th>Sesión</th>
+        <th>Duración</th>
+        <th>RPE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="movilidad"><td><strong>Lunes</strong></td><td><span class="cal-pill" style="background:#c9a96e">🌀 Movilidad</span></td><td>Ducha articular + 90/90 + foam roller cadena lateral</td><td>20 min</td><td>2/10</td></tr>
+      <tr class="fuerza"><td><strong>Martes</strong></td><td><span class="cal-pill" style="background:#c1704a">💪 Fuerza A</span></td><td>Rutina A con +1 kg en mancuerna (donde lo sientas cómodo)</td><td>30 min</td><td>7/10</td></tr>
+      <tr class="calistenia"><td><strong>Miércoles</strong></td><td><span class="cal-pill" style="background:#2c3e50">🤸 Calistenia</span></td><td>Ducha articular + sesión nivel 3: Get-Up sin peso · Bear crawl · Crab walk · Equilibrio monopodal · Dead Hang</td><td>25 min</td><td>5/10</td></tr>
+      <tr class="yoga"><td><strong>Jueves</strong></td><td><span class="cal-pill" style="background:#7a9e7e">🧘 Yoga</span></td><td>Tu sesión semanal de yoga + Nadi Shodhana extendido (10 min)</td><td>50-60 min</td><td>4/10</td></tr>
+      <tr class="movilidad"><td><strong>Viernes</strong></td><td><span class="cal-pill" style="background:#c9a96e">🌀 Movilidad</span></td><td>Ducha articular + Yoga Nidra corto (15 min)</td><td>25 min</td><td>1/10</td></tr>
+      <tr class="fuerza"><td><strong>Sábado</strong></td><td><span class="cal-pill" style="background:#c1704a">💪 Fuerza B</span></td><td>Rutina B con progresión (subir 1-2 reps por serie)</td><td>30 min</td><td>7/10</td></tr>
+      <tr class="descanso"><td><strong>Domingo</strong></td><td><span class="cal-pill" style="background:#1a1f2e">🌙 Yoga Nidra</span></td><td>Ducha articular + Yoga Nidra completo + paseo al aire libre 30 min</td><td>50 min</td><td>2/10</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:#2c3e50;margin-top:36px">🌟 FASE 3 · Profundización · Semanas 5-6</h3>
+  <p>Te sueltas. Aparecen los flujos y la autonomía. Tu cuerpo ya sabe qué necesita cada día.</p>
+
+  <table class="cal-tabla">
+    <thead>
+      <tr>
+        <th>Día</th>
+        <th>Pilar protagonista</th>
+        <th>Sesión</th>
+        <th>Duración</th>
+        <th>RPE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="movilidad"><td><strong>Lunes</strong></td><td><span class="cal-pill" style="background:#c9a96e">🌀 Movilidad</span></td><td>Ducha articular avanzada + protocolo banda iliotibial completo</td><td>25 min</td><td>2/10</td></tr>
+      <tr class="fuerza"><td><strong>Martes</strong></td><td><span class="cal-pill" style="background:#c1704a">💪 Fuerza A++</span></td><td>Rutina A con cargas máximas del programa · RIR 2 · pausa abajo en sentadilla</td><td>32 min</td><td>8/10</td></tr>
+      <tr class="calistenia"><td><strong>Miércoles</strong></td><td><span class="cal-pill" style="background:#2c3e50">🤸 Calistenia 4</span></td><td>Sesión avanzada: introducimos Beast→Crab (Animal Flow) · Get-Up con mancuerna 1 kg · Dead Hang con elevación rodillas</td><td>30 min</td><td>6/10</td></tr>
+      <tr class="yoga"><td><strong>Jueves</strong></td><td><span class="cal-pill" style="background:#7a9e7e">🧘 Yoga</span></td><td>Tu sesión yoga + Eka Pada Rajakapotasana (4 min lado izq) + Savasana extendido</td><td>60 min</td><td>4/10</td></tr>
+      <tr class="movilidad"><td><strong>Viernes</strong></td><td><span class="cal-pill" style="background:#c9a96e">🌀 Sesión libre</span></td><td>Tú eliges: ducha articular + lo que tu cuerpo te pida (foam roller, hipopresivos, asana favorita...)</td><td>20-30 min</td><td>3/10</td></tr>
+      <tr class="fuerza"><td><strong>Sábado</strong></td><td><span class="cal-pill" style="background:#c1704a">💪 Fuerza B++</span></td><td>Rutina B con cargas máximas · 1 serie extra en peso muerto rumano</td><td>32 min</td><td>8/10</td></tr>
+      <tr class="descanso"><td><strong>Domingo</strong></td><td><span class="cal-pill" style="background:#1a1f2e">🌙 Yoga Nidra</span></td><td>Yoga Nidra largo + paseo + reflexión semanal con diario</td><td>60 min</td><td>1/10</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:#2c3e50;margin-top:34px">🕯️ Modo Express · cuando no puedas</h3>
+  <div class="tip" style="background:#fff;border-left-color:#7a9e7e">
+    <strong>Para los días de poca energía, exámenes inminentes o cualquier "no puedo".</strong> Total: 12 minutos. <strong>Cuenta como sesión completa en la racha</strong> — no la pierdes.
+    <ol style="margin:10px 0 0;padding-left:22px">
+      <li><strong>Ducha articular express</strong> · 5 minutos (CARs hombro y cadera · respiración 360° · postura del niño)</li>
+      <li><strong>Viparita Karani</strong> (piernas en la pared) · 5 minutos</li>
+      <li><strong>Nadi Shodhana</strong> · 2 minutos</li>
+    </ol>
+  </div>
+</div>
+</section>
+
+<!-- ============ 12. HÁBITOS INTEGRADOS ============ -->
+<section id="habitos" class="sec-light">
+<div class="wrap">
+  <h2>🌿 Hábitos que sostienen el programa</h2>
+  <p class="sec-sub">Lo que pasa entre sesiones cuenta tanto como las sesiones. Especialmente para tu perfil (perimenopausia + HTA + recomposición).</p>
+
+  <div class="habitos-list">
+    <div class="habito" style="border-top-color:#7a9e7e">
+      <h4>💧 Hidratación · 2 L al día</h4>
+      <p>Marcaste "bebo poca agua". Con tu HTA es <strong>importante</strong>: la deshidratación crónica espesa la sangre y obliga al corazón a trabajar más. Una botella de 1 L visible en tu mesa de trabajo, otra de 500 ml en la mesilla. Reglas: 1 vaso al despertarte, 250 ml antes de cada comida, 250 ml antes y después de cada sesión.</p>
+    </div>
+    <div class="habito" style="border-top-color:#c1704a">
+      <h4>🥩 Proteína · 1.6-2 g/kg/día</h4>
+      <p>Eres 62 kg → 100-120 g de proteína al día. Es <strong>NO negociable</strong> para la recomposición corporal en perimenopausia. Distribúyela en 3-4 tomas (25-35 g por toma). Fuentes: huevos (un huevo = 6 g), pescado azul, pollo, legumbres con cereal, lácteos griegos, tofu, tempeh.</p>
+    </div>
+    <div class="habito" style="border-top-color:#c9a96e">
+      <h4>😴 Sueño · objetivo 7-8 h</h4>
+      <p>Marcaste "excelente cuando duermo" pero 6-7 horas. Subir a 7-8 multiplica los efectos del programa: en sueño profundo se sintetiza hormona de crecimiento (recompone tejido), se consolida la memoria (¡exámenes!) y se regula el cortisol. Acuéstate 30 min antes 3 noches por semana.</p>
+    </div>
+    <div class="habito" style="border-top-color:#7a9e7e">
+      <h4>🌅 Luz solar matinal · 10 min</h4>
+      <p>Salir a la luz natural los primeros 60 min después de levantarte (sin gafas de sol) regula tu ritmo circadiano y mejora la calidad del sueño esa misma noche. Aprovecha el café del desayuno para tomarlo en la ventana o balcón abierto.</p>
+    </div>
+    <div class="habito" style="border-top-color:#c1704a">
+      <h4>🚶 Movimiento NEAT · pasos diarios</h4>
+      <p>"NEAT" = energía gastada en movimientos no-ejercicio. Es la palanca más infravalorada para perder peso. Objetivo: <strong>7.000-10.000 pasos/día</strong>. Levántate cada 50 min de la silla. Llamadas caminando. Escaleras siempre.</p>
+    </div>
+    <div class="habito" style="border-top-color:#c9a96e">
+      <h4>🍷 Alcohol · con moderación</h4>
+      <p>No es prohibición, pero el alcohol interfiere con la síntesis de proteína muscular, sube la tensión arterial y empeora el sueño REM. Máximo 1-2 copas a la semana en estos 6 meses si quieres ver recomposición real.</p>
+    </div>
+    <div class="habito" style="border-top-color:#c1704a">
+      <h4>🚬 Tabaco · te lo dejo aquí, sin sermón</h4>
+      <p>El tabaco + HTA es la combinación cardiovascular más estudiada y de mayor riesgo. No te voy a decir que lo dejes — eres adulta. Solo dejo el dato. Cualquier reducción multiplica los beneficios del programa. Y si en algún momento decides dejarlo, soy un buen aliado para acompañarte: la ansiedad de la abstinencia se gestiona con muchas de las herramientas que ya tienes en el Pilar 1.</p>
+    </div>
+    <div class="habito" style="border-top-color:#7a9e7e">
+      <h4>📱 Pantallas y descanso mental</h4>
+      <p>Con los exámenes en el horizonte: 25-30 min de pantalla, 5 min de mirar lejos (regla 20-20-20). Después de cenar: 1 hora sin pantallas antes de dormir. Eso solo te puede subir el sueño en 30-40 min de calidad real.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 13. SUPLEMENTACIÓN Y FITOTERAPIA ============ -->
+<section id="suplementacion" class="sec-warm">
+<div class="wrap">
+  <h2>🌱 Suplementación y Fitoterapia</h2>
+  <p class="sec-sub">Filtrada estrictamente contra tu medicación (Manidipino + Candesartán). Cada propuesta tiene un porqué clínico.</p>
+
+  <div class="tip" style="background:#fff3d8;border-left-color:#a35a3a">
+    <strong>⚠️ ANTES de empezar cualquier suplemento</strong><br>
+    Habla con tu médico de cabecera o lleva esta lista a tu próxima revisión. Aunque están elegidos con cuidado para tu medicación, la palabra final es siempre de tu médico. La fitoterapia es eficaz precisamente porque es activa — y todo lo que es activo tiene contraindicaciones y dosis.
+  </div>
+
+  <h3 style="color:#a35a3a;margin-top:24px">✅ Recomendados para ti</h3>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head"><div><h3>Magnesio bisglicinato · 300-400 mg/noche</h3><div class="sub">Forma de magnesio mejor absorbida y mejor tolerada</div></div><div class="badges-row"><span class="badge-sem v">🟢 Sinérgico con tu medicación</span></div></div>
+    <div class="bloque"><strong>¿Por qué para ti?</strong>Relaja la musculatura lisa (vasodilatador suave que potencia el efecto de Manidipino y Candesartán de forma SINÉRGICA, no conflictiva), mejora el sueño profundo, reduce calambres y ayuda al manejo del estrés. El 75% de la población adulta es deficitaria. Especialmente útil en perimenopausia.</div>
+    <div class="bloque"><strong>Cuándo tomarlo</strong>30-60 minutos antes de dormir, con un vaso de agua. No con leche (compite por absorción).</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head"><div><h3>Omega 3 (EPA+DHA) · 2-3 g/día</h3><div class="sub">Aceite de pescado de alta calidad o algas</div></div><div class="badges-row"><span class="badge-sem v">🟢 Sinérgico con tu medicación</span></div></div>
+    <div class="bloque"><strong>¿Por qué para ti?</strong>Cardioprotector documentado, antiinflamatorio sistémico (útil para tu cintilla iliotibial y para reducir el cortisol basal), mejora del perfil lipídico, y SINÉRGICO con los ARA-II (Candesartán) en el control tensional. Triple beneficio en tu caso.</div>
+    <div class="bloque"><strong>Cuándo tomarlo</strong>En la comida principal (mejor absorción con grasa). Cápsulas que indiquen ≥500 mg EPA+DHA. Marcas con certificado IFOS de pureza son las más fiables.</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head"><div><h3>Vitamina D3 + K2 · 2.000-4.000 UI</h3><div class="sub">Sigues con D, mejor añadir K2</div></div><div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div></div>
+    <div class="bloque"><strong>¿Por qué para ti?</strong>Ya tomas vitamina D — añadir K2 (forma MK-7) es la actualización clínica de los últimos años: dirige el calcio al hueso (lo necesitas en perimenopausia) y evita que se deposite en las arterias (importante con tu HTA).</div>
+    <div class="bloque"><strong>Cuándo tomarlo</strong>En la comida principal con grasa. Pídele a tu médico el control de vitamina D en sangre — la dosis se ajusta a tu nivel real.</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head"><div><h3>Hibisco (Hibiscus sabdariffa) · infusión 1-2 tazas/día</h3><div class="sub">Antihipertensivo natural validado en ensayos clínicos</div></div><div class="badges-row"><span class="badge-sem v">🟢 Sinérgico con tu medicación</span></div></div>
+    <div class="bloque"><strong>¿Por qué para ti?</strong>Tiene efecto antihipertensivo SINÉRGICO con los ARA-II (estudios muestran reducciones adicionales de 7-12 mmHg de sistólica). Además es rico en antocianinas (antioxidante) y aporta hidratación extra. Sabor agradable, color precioso.</div>
+    <div class="bloque"><strong>Cómo tomarlo</strong>1 cucharadita de flor seca por taza, agua caliente (no hervida) 5-7 min. Sin azúcar. Por la tarde o tras la comida. Avisa a tu médico — puede que con el tiempo te ajuste la medicación a la baja.</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head"><div><h3>Cúrcuma (Curcuma longa) · 500-1.000 mg/día</h3><div class="sub">Con piperina para absorción (curcumina + black pepper)</div></div><div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div></div>
+    <div class="bloque"><strong>¿Por qué para ti?</strong>Antiinflamatorio sistémico — apoya la recuperación de tu cintilla iliotibial y reduce inflamación crónica de bajo grado típica en perimenopausia.</div>
+    <div class="bloque"><strong>Cuándo tomarlo</strong>Con la comida principal. Si tomas anticoagulantes en el futuro, suspender (la cúrcuma tiene efecto antiagregante suave).</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head"><div><h3>Colágeno hidrolizado tipo II + Vitamina C · 10 g/día</h3><div class="sub">Recuperación de tejido conectivo y articular</div></div><div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div></div>
+    <div class="bloque"><strong>¿Por qué para ti?</strong>La síntesis de colágeno cae bruscamente en perimenopausia. Aporta los aminoácidos específicos (glicina, prolina, hidroxiprolina) para fascia, tendones y articulaciones. Especialmente útil con tu trabajo sobre la cintilla iliotibial.</div>
+    <div class="bloque"><strong>Cuándo tomarlo</strong>30-60 min antes de entrenar, con vitamina C (un kiwi, un zumo). Estudios muestran que ese momento concreto maximiza el efecto.</div>
+  </article>
+
+  <article class="ficha movilidad">
+    <div class="ficha-head"><div><h3>Creatina monohidrato · 3-5 g/día</h3><div class="sub">El suplemento más estudiado y seguro · sí, también para mujeres</div></div><div class="badges-row"><span class="badge-sem v">🟢 Segura</span></div></div>
+    <div class="bloque"><strong>¿Por qué para ti?</strong>La creatina no es solo para "culturistas". Es <strong>uno de los suplementos más útiles para mujeres en perimenopausia</strong> — mejora rendimiento de fuerza (clave en tu recomposición), aumenta masa muscular, mejora función cognitiva (especialmente bajo estrés mental — exámenes), y hay literatura emergente sobre efecto en estado de ánimo y prevención de sarcopenia.</div>
+    <div class="bloque"><strong>Cuándo tomarlo</strong>3-5 g al día, en cualquier momento, todos los días (también los de descanso). Con agua o zumo. No hace falta "fase de carga".</div>
+  </article>
+
+  <h3 style="color:#a35a3a;margin-top:30px">🚫 Lo que YO DESCARTO para ti</h3>
+
+  <div class="tip" style="background:#fff3d8;border-left-color:#a35a3a">
+    <strong>Pomelo y zumo de pomelo</strong><br>
+    <strong>Inhibe la enzima CYP3A4 hepática</strong>, que es la que metaboliza tu Manidipino. Si tomas pomelo, las concentraciones de Manidipino pueden subir hasta 3-5 veces — peligroso. Eliminar del todo durante el tratamiento.
+  </div>
+
+  <div class="tip" style="background:#fff3d8;border-left-color:#a35a3a">
+    <strong>Regaliz (Glycyrrhiza glabra)</strong><br>
+    Aumenta la retención de sodio y la tensión arterial. Contrarresta directamente tu medicación. Cuidado con infusiones digestivas que lo lleven (mira la etiqueta).
+  </div>
+
+  <div class="tip" style="background:#fff3d8;border-left-color:#a35a3a">
+    <strong>Ginseng (especialmente Panax)</strong><br>
+    Puede subir la tensión arterial en dosis medias-altas. Si lo usas, solo en dosis muy bajas y con control de TA.
+  </div>
+
+  <div class="tip" style="background:#fff3d8;border-left-color:#a35a3a">
+    <strong>Efedra y Naranja amarga (Citrus aurantium)</strong><br>
+    Vasoconstrictores. NO. Cuidado con suplementos "termogénicos" o quemagrasas que las llevan.
+  </div>
+
+  <div class="tip" style="background:#fff3d8;border-left-color:#a35a3a">
+    <strong>Hierba de San Juan (Hypericum)</strong><br>
+    Induce el CYP3A4, lo contrario al pomelo: reduce el efecto del Manidipino. Si en algún momento tomas algo "para el ánimo", consúltalo.
+  </div>
+</div>
+</section>
+
+<!-- ============ 14. LECTURAS RECOMENDADAS ============ -->
+<section id="lecturas" class="sec-light">
+<div class="wrap">
+  <h2>📚 Lecturas para acompañar el proceso</h2>
+  <p class="sec-sub">Siete libros que amplían lo que hay en este programa. No tienes que leerlos todos — elige el que te llame ahora.</p>
+
+  <div class="libro">
+    <h4>Outlive · El arte y la ciencia de vivir más y mejor</h4>
+    <div class="aut">Peter Attia</div>
+    <p>El manual moderno de longevidad activa. Te va a explicar con datos por qué la fuerza, el VO2max y la masa muscular son tus mejores aliados a partir de los 40. Imprescindible para tu objetivo de "envejecer bien".</p>
+  </div>
+
+  <div class="libro">
+    <h4>The Barbell Prescription · Strength Training for Life After 40</h4>
+    <div class="aut">Sullivan & Baker</div>
+    <p>El libro definitivo sobre entrenamiento de fuerza después de los 40. Escrito por un médico y un entrenador. Te va a dar el marco teórico para lo que estás haciendo en el Pilar 2.</p>
+  </div>
+
+  <div class="libro">
+    <h4>El cuerpo lleva la cuenta</h4>
+    <div class="aut">Bessel van der Kolk</div>
+    <p>Una de las obras más importantes de las últimas décadas sobre la relación cuerpo-mente. Para una instructora de yoga como tú, va a poner palabras a cosas que ya intuías.</p>
+  </div>
+
+  <div class="libro">
+    <h4>Yoga para la rigidez</h4>
+    <div class="aut">Bernie Clark</div>
+    <p>El gran libro del Yin Yoga. Te va a dar herramientas para profundizar en las asanas que sostienen 3-5 minutos — muy útiles para tu protocolo cintilla y para tu propia práctica como instructora.</p>
+  </div>
+
+  <div class="libro">
+    <h4>Becoming a Supple Leopard</h4>
+    <div class="aut">Kelly Starrett</div>
+    <p>La biblia visual de la movilidad funcional. Tiene un capítulo entero sobre cadena lateral y banda iliotibial que vale el libro entero. Lectura más técnica, perfecta para tu nivel.</p>
+  </div>
+
+  <div class="libro">
+    <h4>La trampa de la felicidad</h4>
+    <div class="aut">Russ Harris</div>
+    <p>Para los exámenes y para la vida. Terapia de Aceptación y Compromiso (ACT) accesible — la mejor herramienta que conozco para no luchar contra la ansiedad sino convivir con ella mientras avanzas hacia lo que importa.</p>
+  </div>
+
+  <div class="libro">
+    <h4>The Menopause Reset</h4>
+    <div class="aut">Mindy Pelz</div>
+    <p>Sobre los cambios metabólicos y hormonales de la perimenopausia y cómo abordarlos. Te va a explicar el "me cuesta perder peso" con la fisiología detrás.</p>
+  </div>
+</div>
+</section>
+
+<!-- ============ 15. DIARIO INTERACTIVO ============ -->
+<section id="diario" class="sec-warm">
+<div class="wrap">
+  <h2>📖 Tu Diario de Práctica</h2>
+  <p class="sec-sub">Rellénalo aquí mismo. Se guarda automáticamente en este navegador. También puedes imprimir cualquier semana.</p>
+
+  <p>El diario es <strong>la herramienta más infravalorada del programa</strong>. Mide lo subjetivo (sensación física, emocional) que los datos no captan. Repasarlo cada 2 semanas te va a mostrar progresos que tus ojos no ven.</p>
+
+  <!-- Selector de semana -->
+  <div id="diario-selector" style="display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 12px;justify-content:center">
+    <button class="sem-btn" data-sem="1" onclick="cargarSemana(1)">Semana 1</button>
+    <button class="sem-btn" data-sem="2" onclick="cargarSemana(2)">Semana 2</button>
+    <button class="sem-btn" data-sem="3" onclick="cargarSemana(3)">Semana 3</button>
+    <button class="sem-btn" data-sem="4" onclick="cargarSemana(4)">Semana 4</button>
+    <button class="sem-btn" data-sem="5" onclick="cargarSemana(5)">Semana 5</button>
+    <button class="sem-btn" data-sem="6" onclick="cargarSemana(6)">Semana 6</button>
+  </div>
+  <div id="diario-estado" style="text-align:center;font-size:0.82rem;color:#7a9e7e;height:20px;margin-bottom:8px;font-style:italic">&nbsp;</div>
+
+  <h3 id="diario-titulo" style="color:#a35a3a;margin:18px 0 14px">Semana 1</h3>
+
+  <table class="diario" id="diario-tabla">
+    <thead>
+      <tr>
+        <th class="col1"></th>
+        <th>Lun</th>
+        <th>Mar</th>
+        <th>Mié</th>
+        <th>Jue</th>
+        <th>Vie</th>
+        <th>Sáb</th>
+        <th>Dom</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="col1">Sesión hecha (pilar)</td>
+        <td><input type="text" data-f="0" data-d="0" placeholder="—"></td>
+        <td><input type="text" data-f="0" data-d="1" placeholder="—"></td>
+        <td><input type="text" data-f="0" data-d="2" placeholder="—"></td>
+        <td><input type="text" data-f="0" data-d="3" placeholder="—"></td>
+        <td><input type="text" data-f="0" data-d="4" placeholder="—"></td>
+        <td><input type="text" data-f="0" data-d="5" placeholder="—"></td>
+        <td><input type="text" data-f="0" data-d="6" placeholder="—"></td>
+      </tr>
+      <tr><td class="col1">Duración (min)</td>
+        <td><input type="text" data-f="1" data-d="0" placeholder="—"></td>
+        <td><input type="text" data-f="1" data-d="1" placeholder="—"></td>
+        <td><input type="text" data-f="1" data-d="2" placeholder="—"></td>
+        <td><input type="text" data-f="1" data-d="3" placeholder="—"></td>
+        <td><input type="text" data-f="1" data-d="4" placeholder="—"></td>
+        <td><input type="text" data-f="1" data-d="5" placeholder="—"></td>
+        <td><input type="text" data-f="1" data-d="6" placeholder="—"></td>
+      </tr>
+      <tr><td class="col1">RPE — esfuerzo percibido<br><span style="font-weight:400;color:#8b7355;font-size:0.78rem;font-style:italic">1 = muy fácil · 10 = máximo</span></td>
+        <td><input type="text" data-f="2" data-d="0" placeholder="—"></td>
+        <td><input type="text" data-f="2" data-d="1" placeholder="—"></td>
+        <td><input type="text" data-f="2" data-d="2" placeholder="—"></td>
+        <td><input type="text" data-f="2" data-d="3" placeholder="—"></td>
+        <td><input type="text" data-f="2" data-d="4" placeholder="—"></td>
+        <td><input type="text" data-f="2" data-d="5" placeholder="—"></td>
+        <td><input type="text" data-f="2" data-d="6" placeholder="—"></td>
+      </tr>
+      <tr><td class="col1">Dolor pierna izq. (0-10)</td>
+        <td><input type="text" data-f="3" data-d="0" placeholder="—"></td>
+        <td><input type="text" data-f="3" data-d="1" placeholder="—"></td>
+        <td><input type="text" data-f="3" data-d="2" placeholder="—"></td>
+        <td><input type="text" data-f="3" data-d="3" placeholder="—"></td>
+        <td><input type="text" data-f="3" data-d="4" placeholder="—"></td>
+        <td><input type="text" data-f="3" data-d="5" placeholder="—"></td>
+        <td><input type="text" data-f="3" data-d="6" placeholder="—"></td>
+      </tr>
+      <tr><td class="col1">Sueño (horas)</td>
+        <td><input type="text" data-f="4" data-d="0" placeholder="—"></td>
+        <td><input type="text" data-f="4" data-d="1" placeholder="—"></td>
+        <td><input type="text" data-f="4" data-d="2" placeholder="—"></td>
+        <td><input type="text" data-f="4" data-d="3" placeholder="—"></td>
+        <td><input type="text" data-f="4" data-d="4" placeholder="—"></td>
+        <td><input type="text" data-f="4" data-d="5" placeholder="—"></td>
+        <td><input type="text" data-f="4" data-d="6" placeholder="—"></td>
+      </tr>
+      <tr><td class="col1">Hidratación (vasos)</td>
+        <td><input type="text" data-f="5" data-d="0" placeholder="—"></td>
+        <td><input type="text" data-f="5" data-d="1" placeholder="—"></td>
+        <td><input type="text" data-f="5" data-d="2" placeholder="—"></td>
+        <td><input type="text" data-f="5" data-d="3" placeholder="—"></td>
+        <td><input type="text" data-f="5" data-d="4" placeholder="—"></td>
+        <td><input type="text" data-f="5" data-d="5" placeholder="—"></td>
+        <td><input type="text" data-f="5" data-d="6" placeholder="—"></td>
+      </tr>
+      <tr><td class="col1">Sensación física</td>
+        <td><input type="text" data-f="6" data-d="0" placeholder="…"></td>
+        <td><input type="text" data-f="6" data-d="1" placeholder="…"></td>
+        <td><input type="text" data-f="6" data-d="2" placeholder="…"></td>
+        <td><input type="text" data-f="6" data-d="3" placeholder="…"></td>
+        <td><input type="text" data-f="6" data-d="4" placeholder="…"></td>
+        <td><input type="text" data-f="6" data-d="5" placeholder="…"></td>
+        <td><input type="text" data-f="6" data-d="6" placeholder="…"></td>
+      </tr>
+      <tr><td class="col1">Sensación emocional</td>
+        <td><input type="text" data-f="7" data-d="0" placeholder="…"></td>
+        <td><input type="text" data-f="7" data-d="1" placeholder="…"></td>
+        <td><input type="text" data-f="7" data-d="2" placeholder="…"></td>
+        <td><input type="text" data-f="7" data-d="3" placeholder="…"></td>
+        <td><input type="text" data-f="7" data-d="4" placeholder="…"></td>
+        <td><input type="text" data-f="7" data-d="5" placeholder="…"></td>
+        <td><input type="text" data-f="7" data-d="6" placeholder="…"></td>
+      </tr>
+      <tr><td class="col1">Sankalpa de hoy</td>
+        <td colspan="7"><input type="text" data-f="8" data-d="0" placeholder="Sankalpa de la semana o del día…" style="width:100%"></td>
+      </tr>
+      <tr><td class="col1">Notas y observaciones</td>
+        <td colspan="7"><textarea data-f="9" data-d="0" rows="3" placeholder="Lo que quieras dejar escrito de esta semana…" style="width:100%;min-height:70px;resize:vertical"></textarea></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;justify-content:space-between;align-items:center">
+    <button onclick="limpiarSemana()" style="background:transparent;color:#a35a3a;border:1px solid #a35a3a;padding:9px 18px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.88rem">↺ Limpiar esta semana</button>
+    <button onclick="imprimirDiario()" style="background:#7a9e7e;color:#fff;border:0;padding:9px 18px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.88rem">🖨️ Imprimir solo el diario</button>
+  </div>
+
+  <p style="margin-top:24px;color:#8b7355;font-style:italic;font-size:0.92rem">Todo se guarda automáticamente en este navegador. Al final del programa tendrás un retrato fidedigno de tu proceso real — más honesto que el de cualquier báscula. Si cambias de dispositivo, los datos quedan en el navegador original.</p>
+</div>
+</section>
+
+<style>
+  /* Estilos del diario interactivo */
+  .sem-btn{background:#fff;color:#a35a3a;border:2px solid #c9a96e;padding:9px 14px;border-radius:20px;font-family:inherit;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
+  .sem-btn:hover{background:#f5ede0}
+  .sem-btn.active{background:#c1704a;color:#fff;border-color:#c1704a}
+  .diario input[type="text"], .diario textarea{
+    width:100%;border:0;background:transparent;font-family:inherit;font-size:0.85rem;color:#1a1a2e;
+    padding:4px 6px;border-radius:4px;outline:none;box-sizing:border-box
+  }
+  .diario input[type="text"]:focus, .diario textarea:focus{background:#fffaeb;outline:1px solid #c9a96e}
+  .diario input::placeholder, .diario textarea::placeholder{color:#c4b599;font-style:italic}
+  @media print{
+    #diario-selector, #diario-estado, #diario button{display:none !important}
+    .diario input[type="text"], .diario textarea{border:0 !important;background:#fff !important}
+  }
+</style>
+
+<script>
+(function(){
+  const DIARIO_KEY='km_mariajose_diario_v1';
+  let semanaActual=1;
+
+  function loadDiario(){try{return JSON.parse(localStorage.getItem(DIARIO_KEY))||{}}catch(e){return{}}}
+  function saveDiario(d){try{localStorage.setItem(DIARIO_KEY,JSON.stringify(d))}catch(e){}}
+  function getKey(f,d){return 'f'+f+'_d'+d}
+
+  function flashDiario(msg,color){
+    const el=document.getElementById('diario-estado');
+    if(!el)return;
+    el.textContent=msg;
+    el.style.color=color||'#7a9e7e';
+    clearTimeout(el._t);
+    el._t=setTimeout(()=>{el.textContent='\u00a0'},1800);
+  }
+
+  window.cargarSemana=function(n){
+    semanaActual=n;
+    document.querySelectorAll('.sem-btn').forEach(b=>{
+      b.classList.toggle('active', parseInt(b.dataset.sem)===n);
+    });
+    document.getElementById('diario-titulo').textContent='Semana '+n;
+    const d=loadDiario();
+    const datosSemana=d[n]||{};
+    document.querySelectorAll('#diario-tabla input[type=text], #diario-tabla textarea').forEach(inp=>{
+      const k=getKey(inp.dataset.f,inp.dataset.d);
+      inp.value=datosSemana[k]||'';
+    });
+  };
+
+  window.limpiarSemana=function(){
+    const fn=()=>{
+      const d=loadDiario();
+      delete d[semanaActual];
+      saveDiario(d);
+      document.querySelectorAll('#diario-tabla input[type=text], #diario-tabla textarea').forEach(inp=>{inp.value=''});
+      flashDiario('Semana '+semanaActual+' borrada','#a35a3a');
+    };
+    if(window.kmConfirm){
+      window.kmConfirm('Vas a borrar todos los datos de la Semana '+semanaActual+'. Esta acción no se puede deshacer.', fn);
+    } else {
+      // fallback si por algún motivo el modal no está cargado todavía
+      if(confirm('¿Borrar todos los datos de la Semana '+semanaActual+'?'))fn();
+    }
+  };
+
+  window.imprimirDiario=function(){
+    // Truco: añade clase temporal al body para ocultar todo menos el diario
+    document.body.classList.add('solo-diario');
+    setTimeout(()=>{
+      window.print();
+      setTimeout(()=>document.body.classList.remove('solo-diario'),500);
+    },100);
+  };
+
+  function init(){
+    // Listener de cambios — guarda inmediatamente
+    document.querySelectorAll('#diario-tabla input[type=text], #diario-tabla textarea').forEach(inp=>{
+      inp.addEventListener('input',()=>{
+        const d=loadDiario();
+        if(!d[semanaActual])d[semanaActual]={};
+        const k=getKey(inp.dataset.f,inp.dataset.d);
+        if(inp.value.trim()===''){delete d[semanaActual][k];}
+        else{d[semanaActual][k]=inp.value;}
+        saveDiario(d);
+        flashDiario('Guardado ✓');
+      });
+    });
+    cargarSemana(1);
+  }
+
+  document.addEventListener('DOMContentLoaded',init);
+  if(document.readyState!=='loading')init();
+})();
+</script>
+
+<style>
+  /* Modo "solo diario" para imprimir solo el diario */
+  body.solo-diario > *:not(#diario):not(style):not(script){display:none !important}
+  body.solo-diario #diario{padding-top:20px}
+  body.solo-diario .btn-imprimir{display:none !important}
+</style>
+
+<!-- ============ 16. CARTA DE DESPEDIDA ============ -->
+<section id="despedida" class="sec-night">
+<div class="wrap" style="max-width:680px">
+  <div class="ornament"></div>
+  <h2 style="font-family:Georgia,serif;color:#c9a96e;font-size:1.85rem;margin-bottom:24px;text-align:center">Antes de cerrar este documento</h2>
+
+  <div class="carta">
+    <p>María José, si has llegado hasta aquí leyendo todo, ya eres una persona ligeramente distinta a la que abrió este documento. Eso solo merece pararse un momento a celebrarlo.</p>
+
+    <p>Lo que viene ahora son seis semanas de práctica. Va a haber días buenos, días flojos, y días en los que vas a querer cerrar la pestaña, abrir Instagram y olvidarte. Esos días son los importantes. No los días buenos — los flojos. Es ahí donde se construye realmente un cuerpo.</p>
+
+    <p>Para esos días, recuerda dos cosas: el <strong>Modo Express</strong> existe (12 minutos siempre son suficientes), y la <strong>ducha articular</strong> de 5 minutos vale como racha. No hace falta hacer una hora — hace falta aparecer. Tu cuerpo agradece más la constancia mínima que la intensidad esporádica.</p>
+
+    <p>Mira la rueda radar cada domingo. No tengas prisa por ver grandes cambios — los cambios reales son progresivos y a veces invisibles hasta que un día notas que sí, que subes las escaleras sin pensarlo, que duermes mejor, que la cara lateral de la pierna ya no te avisa al final del día, que la tensión arterial baja, que la cabeza está más limpia para los exámenes. Eso es el programa funcionando.</p>
+
+    <p>Cuando termines las 6 semanas, llámame. Vamos a revisar todo. Veremos qué pilares mantenemos, qué hacemos con el Pilar Yoga de cara a tu trabajo como instructora, y cómo construimos juntos el siguiente bloque de 12 semanas para que esto no sea un "programa que hice una vez" sino el inicio de algo que se queda contigo el resto de tu vida.</p>
+
+    <p>Y si en algún momento te bloqueas, si algo no te encaja, si tienes una duda, si la cara lateral de la pierna duele más, si la tensión sube, si necesitas adaptar — escríbeme. Aquí estoy. Para ajustar, para escuchar, para celebrar contigo cada hito.</p>
+
+    <p style="margin-top:28px;font-size:1.1rem;color:#c9a96e">Tu cuerpo ya sabe el camino. Yo solo te ayudo a escucharlo.</p>
+
+    <p style="margin-top:14px">Con todo mi cariño y mi convicción de que esto va a salir muy bien,</p>
+
+    <div class="firma">— Kiko</div>
+    <div style="color:#888899;font-size:0.85rem;margin-top:14px">Kiko Martínez · Terapeuta Natural<br>Tu bienestar, mi máxima prioridad. 🌿</div>
+  </div>
+  <div class="ornament" style="margin-top:30px"></div>
+</div>
+</section>
+
+<!-- ============ 17. AVISO CLÍNICO FINAL ============ -->
+<section id="cierre" class="sec-light" style="padding:34px 20px 60px">
+<div class="wrap">
+  <div class="aviso" style="background:#fff;border-color:#888">
+    <div class="ico" style="color:#888">⚠️</div>
+    <div>
+      <h3 style="color:#4a4a6a">Aviso clínico final</h3>
+      <p>Este Programa Integral de Movimiento ha sido diseñado de forma personalizada para tu perfil actual. <strong>No sustituye ningún tratamiento médico, fisioterapéutico o psicológico prescrito.</strong> Dado que tomas medicación antihipertensiva (Manidipino + Candesartán), te recomiendo encarecidamente compartir este programa con tu médico de cabecera en tu próxima revisión. Ante cualquier dolor agudo, nueva sintomatología, mareo, palpitación inusual, presión torácica o duda sobre tu salud durante la práctica, <strong>detén el ejercicio y consulta con tu médico o terapeuta de referencia</strong>. Kiko Martínez no asume responsabilidad clínica por el uso del programa fuera del contexto de la consulta presencial.</p>
+    </div>
+  </div>
+
+  <p style="text-align:center;color:#8b7355;font-style:italic;margin-top:30px;font-size:0.9rem">Documento generado el 16 de mayo de 2026 · Versión 1.0<br>Programa Integral de Movimiento · Kiko Martínez · Bienestar Natural</p>
+</div>
+</section>
+
+<button class="btn-imprimir" onclick="window.print()" title="Imprimir o guardar como PDF">🖨️ Imprimir / PDF</button>
+
+</body>
+</html>
